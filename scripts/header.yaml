@@ -1,0 +1,9 @@
+---
+title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
+date: "`r Sys.Date()`"
+author: Benjamin Chan (chanb@ohsu.edu)
+output:
+  html_document:
+    toc: true
+    theme: simplex
+---

@@ -1,0 +1,96 @@
+# Import raw data
+
+```{r}
+df1 <-
+  "data/raw/Spain Manifest.xlsx" %>% 
+  read_excel(.) %>% 
+  rename(sampleID = "Sample #",
+         patientID = "Patient ID",
+         visitMonth = "Visit month",
+         studyArm = "Study Arm") %>% 
+  mutate(patientID = patientID %>% factor(),
+         visitMonth = visitMonth %>% gsub("M", "", .) %>% as.integer() %>% factor(),
+         studyArm = studyArm %>% factor())
+```
+
+```{r}
+foo <- function(range) {
+  require(magrittr)
+  require(readxl)
+  "data/raw/Copy of Oregon GSHGSSG.xlsx" %>% 
+  read_excel(., range = range)
+}
+df2 <-
+  foo("G2:I60") %>% 
+  rename(sampleID = "X__1",
+         meanResponseGSH = "GSH",
+         meanResponseGSSG = "GSSG")
+df3 <-
+  foo("K2:M60") %>% 
+  rename(sampleID = "X__1",
+         sdGSH = "GSH",
+         sdGSSG = "GSSG")
+df4 <-
+  foo("O2:Q60") %>% 
+  rename(sampleID = "X__1",
+         seGSH = "GSH",
+         seGSSG = "GSSG")
+df5 <-
+  foo("S2:W60") %>% 
+  rename(sampleID = "X__1",
+         concentrationGSHugml = "GSH",
+         concentrationGSSGugml = "GSSG",
+         concentrationStdEGSHugml = "GSH StdE",
+         concentrationStdEGSSGugml = "GSSG StdE")
+df6 <-
+  foo("Y2:AC60") %>% 
+  rename(sampleID = "X__1",
+         concentrationGSHuM = "GSH",
+         concentrationGSSGuM = "GSSG",
+         concentrationStdEGSHuM = "GSH StdE",
+         concentrationStdEGSSGuM = "GSSG StdE")
+df7 <-
+  foo("G64:K122") %>% 
+  rename(sampleID = "X__1",
+         nmolGSH = "GSH",
+         nmolGSSG = "GSSG",
+         nmolStdEGSH = "GSH StdE",
+         nmolStdEGSSG = "GSSG StdE")
+df8 <-
+  foo("M64:P122") %>% 
+  rename(sampleID = "X__1",
+         proteinConcugul = "(ug/ul)",
+         proteinConcug = "ug",
+         proteinConcmg = "mg")
+df9 <-
+  foo("R64:V122") %>% 
+  rename(sampleID = "X__1",
+         normalizedConcGSH = "GSH",
+         normalizedConcGSSG = "GSSG",
+         normalizedConcStdEGSH = "GSH StdE",
+         normalizedConcStdEGSSG = "GSSG StdE")
+df10 <-
+  foo("X64:Y122") %>% 
+  rename(sampleID = "X__1",
+         normalizedConcRatio = "GSH/GSSG")
+```
+
+Joined data set.
+
+```{r}
+df <-
+  inner_join(df1, df2 , by = "sampleID") %>% 
+  inner_join(.  , df3 , by = "sampleID") %>% 
+  inner_join(.  , df4 , by = "sampleID") %>% 
+  inner_join(.  , df5 , by = "sampleID") %>% 
+  inner_join(.  , df6 , by = "sampleID") %>% 
+  inner_join(.  , df7 , by = "sampleID") %>% 
+  inner_join(.  , df8 , by = "sampleID") %>% 
+  inner_join(.  , df9 , by = "sampleID") %>% 
+  inner_join(.  , df10, by = "sampleID")
+str(df)
+```
+
+```{r}
+rm(df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, foo)
+```

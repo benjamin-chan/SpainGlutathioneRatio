@@ -1,0 +1,11 @@
+```{r, echo = FALSE, messages = FALSE, warning = FALSE}
+setwd("~/Projects/SpainGlutathioneRatio")
+
+library(magrittr)
+library(tidyverse)
+library(readxl)
+
+set.seed(as.integer(as.Date("2018-03-08")))
+
+# sapply(list.files("lib", full.names = TRUE), source)
+```

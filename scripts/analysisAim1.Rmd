@@ -1,0 +1,79 @@
+# Aim 1
+
+
+## Normalized concentration ratio
+
+GSH:GSSG ratio
+
+![figures/lineplotNormalizedConcRatio.png](figures/lineplotNormalizedConcRatio.png)
+
+```{r}
+G <-
+  df %>% 
+  ggplot(aes(y = normalizedConcRatio, x = visitMonth, group = patientID, color = studyArm)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~ studyArm) +
+  scale_x_discrete("Visit month") +
+  scale_y_continuous("Normalized concentration GSH:GSSG ratio") +
+  theme_bw() +
+  theme(legend.position = "none")
+ggsave("figures/lineplotNormalizedConcRatio.svg", width = 6, height = 4)
+ggsave("figures/lineplotNormalizedConcRatio.png", width = 6, height = 4)
+```
+
+Mixed effects model
+
+```{r}
+M <-
+  df %>% 
+  lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
+       data = .)
+summary(M)
+```
+
+
+## Normalized concentration GSH
+
+![figures/lineplotNormalizedConcGSH.png](figures/lineplotNormalizedConcGSH.png)
+
+```{r}
+G <-
+  df %>% 
+  ggplot(aes(y = normalizedConcGSH, x = visitMonth, group = patientID, color = studyArm)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~ studyArm) +
+  scale_x_discrete("Visit month") +
+  scale_y_continuous("Normalized concentration GSH (nmol/mg)") +
+  theme_bw() +
+  theme(legend.position = "none")
+ggsave("figures/lineplotNormalizedConcGSH.svg", width = 6, height = 4)
+ggsave("figures/lineplotNormalizedConcGSH.png", width = 6, height = 4)
+```
+
+
+## Normalized concentration GSSG
+
+![figures/lineplotNormalizedConcGSSG.png](figures/lineplotNormalizedConcGSSG.png)
+
+```{r}
+G <-
+  df %>% 
+  ggplot(aes(y = normalizedConcGSSG, x = visitMonth, group = patientID, color = studyArm)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~ studyArm) +
+  scale_x_discrete("Visit month") +
+  scale_y_continuous("Normalized concentration GSSG (nmol/mg)") +
+  theme_bw() +
+  theme(legend.position = "none")
+ggsave("figures/lineplotNormalizedConcGSSG.svg", width = 6, height = 4)
+ggsave("figures/lineplotNormalizedConcGSSG.png", width = 6, height = 4)
+```
+
+```{r}
+df %>% 
+  select(studyArm, sampleID, patientID, visitMonth, normalizedConcRatio, normalizedConcGSH, normalizedConcGSSG) %>% 
+  arrange(studyArm, patientID, visitMonth)
+```

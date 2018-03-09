@@ -71,9 +71,3 @@ G <-
 ggsave("figures/lineplotNormalizedConcGSSG.svg", width = 6, height = 4)
 ggsave("figures/lineplotNormalizedConcGSSG.png", width = 6, height = 4)
 ```
-
-```{r}
-df %>% 
-  select(studyArm, sampleID, patientID, visitMonth, normalizedConcRatio, normalizedConcGSH, normalizedConcGSSG) %>% 
-  arrange(studyArm, patientID, visitMonth)
-```

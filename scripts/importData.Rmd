@@ -94,3 +94,15 @@ str(df)
 ```{r}
 rm(df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, foo)
 ```
+
+Data check.
+
+```{r}
+df %>% 
+  group_by(patientID) %>% 
+  summarize(hasM0 = sum(visitMonth == 0),
+            hasM3 = sum(visitMonth == 3),
+            hasM12 = sum(visitMonth == 12)) %>% 
+  filter(hasM0 != 1 | hasM3 != 1 | hasM12 != 1) %>% 
+  kable(align = "c")
+```

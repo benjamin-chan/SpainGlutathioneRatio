@@ -1,6 +1,10 @@
-```{r, echo = FALSE, include = FALSE}
+```{r "setup", eval = FALSE}
 setwd("~/Projects/SpainGlutathioneRatio")
+opts_knit$set(root.dir = getwd())
+opts_knit$get("root.dir")
+```
 
+```{r, echo = FALSE, include = FALSE}
 library(magrittr)
 library(tidyverse)
 library(readxl)

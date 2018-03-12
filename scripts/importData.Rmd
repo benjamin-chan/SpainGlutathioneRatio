@@ -95,7 +95,46 @@ str(df)
 rm(df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, foo)
 ```
 
-Data check.
+
+## Clean data
+
+Data check **before cleaning**.
+
+```{r}
+df %>% 
+  group_by(patientID) %>% 
+  summarize(hasM0 = sum(visitMonth == 0),
+            hasM3 = sum(visitMonth == 3),
+            hasM12 = sum(visitMonth == 12)) %>% 
+  filter(hasM0 != 1 | hasM3 != 1 | hasM12 != 1) %>% 
+  kable(align = "c")
+```
+
+Recode data per Cassidy's email
+
+```
+From: Cassidy Taylor  
+Sent: Monday, March 12, 2018 3:17 PM  
+To: Benjamin Chan <chanb@ohsu.edu>; Rebecca Spain <spainr@ohsu.edu>  
+Subject: RE: Rebecca Spain Glutathione Study  
+
+Just heard back from the lab and based on the remaining levels of blood, the manifest was incorrectly labeled.
+It should read
+
+Sample 44 = 143 M0
+Sample 45 = 143 M3
+Sample 46 = 143 M12
+```
+
+```{r}
+df <- 
+  df %>% 
+  mutate(visitMonth = if_else(sampleID == 44, 0, visitMonth),
+         patientID = if_else(sampleID == 46, 143, patientID))
+```
+
+Data check **after cleaning**.
+Should return an empty data frame.
 
 ```{r}
 df %>% 

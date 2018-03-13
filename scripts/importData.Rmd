@@ -127,14 +127,12 @@ Sample 46 = 143 M12
 ```
 
 ```{r}
-df <- 
-  df %>% 
-  mutate(visitMonth = if_else(sampleID == 44, 0, visitMonth),
-         patientID = if_else(sampleID == 46, 143, patientID))
+df[df$sampleID == 44, "visitMonth"] <- 0
+df[df$sampleID == 46, "patientID"] <- 143
 ```
 
 Data check **after cleaning**.
-Should return an empty data frame.
+Should return a data frame with only `patientID %in% c(120, 122)`.
 
 ```{r}
 df %>% 

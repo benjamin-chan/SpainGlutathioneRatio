@@ -24,7 +24,7 @@ ggsave("figures/lineplotNormalizedConcRatio.png", width = 6, height = 4)
 Mixed effects model using the **lme4** package.
 
 ```{r normalizedConcRatio-lme4}
-M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID / visitMonth),
+M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
           data = df)
 summary(M)
 plot(ranef(M))
@@ -74,7 +74,7 @@ ggsave("figures/lineplotNormalizedConcGSH.png", width = 6, height = 4)
 Mixed effects model using the **lme4** package.
 
 ```{r normalizedConcGSH-lme4}
-M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID / visitMonth),
+M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID),
           data = df)
 summary(M)
 plot(ranef(M))
@@ -124,7 +124,7 @@ ggsave("figures/lineplotNormalizedConcGSSG.png", width = 6, height = 4)
 Mixed effects model using the **lme4** package.
 
 ```{r normalizedConcGSSG-lme4}
-M <- lmer(normalizedConcGSSG ~ studyArm * visitMonth + (1 | patientID / visitMonth),
+M <- lmer(normalizedConcGSSG ~ studyArm * visitMonth + (1 | patientID),
           data = df)
 summary(M)
 plot(ranef(M))

@@ -141,14 +141,6 @@ df %>%
   kable(align = "c")
 ```
 
-Double-check data from `patientID == 143`.
-
-```{r}
-df %>% 
-  filter(patientID == 143) %>% 
-  kable()
-```
-
 
 ## Create analytic data frames for each aim
 

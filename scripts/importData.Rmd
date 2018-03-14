@@ -112,19 +112,17 @@ df %>%
 
 Recode data per Cassidy's email
 
-```
-From: Cassidy Taylor  
-Sent: Monday, March 12, 2018 3:17 PM  
-To: Benjamin Chan <chanb@ohsu.edu>; Rebecca Spain <spainr@ohsu.edu>  
-Subject: RE: Rebecca Spain Glutathione Study  
-
-Just heard back from the lab and based on the remaining levels of blood, the manifest was incorrectly labeled.
-It should read
-
-Sample 44 = 143 M0
-Sample 45 = 143 M3
-Sample 46 = 143 M12
-```
+> From: Cassidy Taylor  
+> Sent: Monday, March 12, 2018 3:17 PM  
+> To: Benjamin Chan <chanb@ohsu.edu>; Rebecca Spain <spainr@ohsu.edu>  
+> Subject: RE: Rebecca Spain Glutathione Study  
+> 
+> Just heard back from the lab and based on the remaining levels of blood, the
+> manifest was incorrectly labeled. It should read
+> 
+> Sample 44 = 143 M0  
+> Sample 45 = 143 M3  
+> Sample 46 = 143 M12  
 
 ```{r}
 df[df$sampleID == 44, "visitMonth"] <- 0

@@ -76,17 +76,15 @@ df10 <-
 ```
 
 Joined data set.
+Include only the 
+
+* Study design variables,
+* Normalized concentrations, and 
+* GSH/GSSG ratios
 
 ```{r}
 df <-
-  inner_join(df1, df2 , by = "sampleID") %>% 
-  inner_join(.  , df3 , by = "sampleID") %>% 
-  inner_join(.  , df4 , by = "sampleID") %>% 
-  inner_join(.  , df5 , by = "sampleID") %>% 
-  inner_join(.  , df6 , by = "sampleID") %>% 
-  inner_join(.  , df7 , by = "sampleID") %>% 
-  inner_join(.  , df8 , by = "sampleID") %>% 
-  inner_join(.  , df9 , by = "sampleID") %>% 
+  inner_join(df1, df9 , by = "sampleID") %>% 
   inner_join(.  , df10, by = "sampleID")
 str(df)
 ```

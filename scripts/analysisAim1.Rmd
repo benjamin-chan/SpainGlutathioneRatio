@@ -21,6 +21,24 @@ ggsave("figures/lineplotNormalizedConcRatio.svg", width = 6, height = 4)
 ggsave("figures/lineplotNormalizedConcRatio.png", width = 6, height = 4)
 ```
 
+![figures/plotNormalizedConcSlope.png](figures/plotNormalizedConcSlope.png)
+
+```{r}
+G <-
+  df1 %>% 
+  ggplot() +
+  aes(x = normalizedConcGSSG, y = normalizedConcGSH) +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
+  geom_point() +
+  scale_x_continuous("Normalized concentration GSSG (nmol/mg)") +
+  scale_y_continuous("Normalized concentration GSH (nmol/mg)") +
+  facet_grid(studyArm ~ visitMonth) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())
+ggsave("figures/plotNormalizedConcSlope.svg", width = 6, height = 4)
+ggsave("figures/plotNormalizedConcSlope.png", width = 6, height = 4)
+```
+
 Mixed effects model using the **lme4** package.
 
 ```{r normalizedConcRatio-lme4}

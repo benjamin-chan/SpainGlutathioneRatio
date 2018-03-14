@@ -139,6 +139,10 @@ Aim 2
 
 
 
+![figures/plotNormalizedConcSlope.png](figures/plotNormalizedConcSlope.png)
+
+
+
 Mixed effects model using the **lme4** package.
 
 

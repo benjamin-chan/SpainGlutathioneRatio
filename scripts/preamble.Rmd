@@ -10,6 +10,7 @@ library(tidyverse)
 library(readxl)
 library(lme4)
 library(nlme)
+library(broom)
 library(svglite)
 
 set.seed(as.integer(as.Date("2018-03-08")))

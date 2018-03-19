@@ -56,7 +56,10 @@ rm(M, res)
 
 Mixed effects model using the **nlme** package.
 
-```{r normalizedConcRatio-nlme}
+*Not executed.*
+The `lme4::lmer()` function is good enough.
+
+```{r normalizedConcRatio-nlme, eval = FALSE}
 M <- lme(normalizedConcRatio ~ studyArm * visitMonth,
          random = ~ 1 | patientID / visitMonth,
          correlation = corAR1(),
@@ -108,7 +111,10 @@ rm(M, res)
 
 Mixed effects model using the **nlme** package.
 
-```{r normalizedConcGSH-nlme}
+*Not executed.*
+The `lme4::lmer()` function is good enough.
+
+```{r normalizedConcGSH-nlme, eval = FALSE}
 M <- lme(normalizedConcGSH ~ studyArm * visitMonth,
          random = ~ 1 | patientID / visitMonth,
          correlation = corAR1(),
@@ -160,7 +166,10 @@ rm(M, res)
 
 Mixed effects model using the **nlme** package.
 
-```{r normalizedConcGSSG-nlme}
+*Not executed.*
+The `lme4::lmer()` function is good enough.
+
+```{r normalizedConcGSSG-nlme, eval = FALSE}
 M <- lme(normalizedConcGSSG ~ studyArm * visitMonth,
          random = ~ 1 | patientID / visitMonth,
          correlation = corAR1(),

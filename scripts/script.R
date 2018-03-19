@@ -9,7 +9,8 @@ sink(file.path("output", "script.log"))
 files <- c("header.yaml",
            "preamble.Rmd",
            "importData.Rmd",
-           "analysisAim1.Rmd")
+           "analysisAim1.Rmd",
+           "analysisAim2.Rmd")
 f <- file("master.Rmd", open = "w")
 for (i in 1:length(files)) {
     x <- readLines(file.path("scripts", files[i]))

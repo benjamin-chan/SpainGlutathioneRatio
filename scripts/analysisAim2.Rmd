@@ -1,0 +1,50 @@
+# Aim 2
+
+
+## 24-month brain atrophy
+
+![figures/lineplotBrainAtrophy.png](figures/lineplotBrainAtrophy.png)
+
+```{r}
+G <-
+  df2 %>% 
+  ggplot(aes(y = brainAtrophy, x = pctChangeConcRatio, group = studyArm, color = studyArm)) +
+  geom_point() +
+  facet_wrap(~ studyArm) +
+  scale_x_continuous("Percent change in normalized GSH:GSSG concentration ratio") +
+  scale_y_continuous("Percent brain atrophy") +
+  theme_bw() +
+  theme(legend.position = "none",
+        panel.grid.minor = element_blank())
+ggsave("figures/lineplotBrainAtrophy.svg", width = 6, height = 4)
+ggsave("figures/lineplotBrainAtrophy.png", width = 6, height = 4)
+```
+
+Linear model.
+
+```{r brainAtrophy}
+df2 <- 
+  df2 %>% 
+  mutate(invConcRatioM0 = 1 / concRatioM0)
+M <- lm(brainAtrophy ~ studyArm, data = df2)
+summary(M)
+M <- update(M, . ~ studyArm + pctChangeConcRatio)
+summary(M)
+M <- update(M, . ~ studyArm + pctChangeConcRatio + concRatioM0)
+summary(M)
+M <- update(M, . ~ studyArm + pctChangeConcRatio + invConcRatioM0)
+summary(M)
+M <- update(M, . ~ studyArm + concRatioM0)
+summary(M)
+M <- update(M, . ~ studyArm + invConcRatioM0)
+summary(M)
+```
+
+```{r}
+tidy(M) %>% kable(digits = 2)
+res <- residuals(M)
+plot(res)
+qqnorm(res)
+plot(M)
+rm(M, res)
+```

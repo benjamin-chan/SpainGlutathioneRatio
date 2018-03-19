@@ -1,6 +1,6 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-03-14"
+date: "2018-03-19"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
@@ -65,15 +65,6 @@ Should return a data frame with only `patientID %in% c(120, 122)`.
 |    120    |   1   |   0   |   1    |
 |    122    |   1   |   0   |   1    |
 
-Double-check data from `patientID == 143`.
-
-
-| sampleID|patientID |visitMonth |studyArm | brainAtrophy| normalizedConcGSH| normalizedConcGSSG| normalizedConcStdEGSH| normalizedConcStdEGSSG| normalizedConcRatio|
-|--------:|:---------|:----------|:--------|------------:|-----------------:|------------------:|---------------------:|----------------------:|-------------------:|
-|       44|143       |0          |Placebo  |     -1.74343|         143.55248|          1.1407128|             3.1716859|              0.2932400|            125.8445|
-|       45|143       |3          |Placebo  |           NA|         169.12581|          1.3286383|             1.1624269|              0.3331352|            127.2926|
-|       46|143       |12         |Placebo  |           NA|          97.65062|          0.5544174|             0.4302695|              0.1872683|            176.1319|
-
 
 ## Create analytic data frames for each aim
 
@@ -92,6 +83,69 @@ Aim 1
 ##  $ normalizedConcStdEGSSG: num  0.223 0.17 0.229 0.186 0.352 ...
 ##  $ normalizedConcRatio   : num  134 158 166 126 132 ...
 ```
+
+
+
+| patientID | visitMonth |studyArm | normalizedConcGSH | normalizedConcGSSG | normalizedConcRatio |
+|:---------:|:----------:|:--------|:-----------------:|:------------------:|:-------------------:|
+|    118    |     0      |LA       |      125.06       |        0.93        |       134.39        |
+|    118    |     3      |LA       |      100.76       |        0.64        |       157.79        |
+|    118    |     12     |LA       |      137.35       |        0.83        |       165.82        |
+|    124    |     0      |LA       |      127.61       |        0.76        |       168.90        |
+|    124    |     3      |LA       |       86.82       |        0.51        |       169.44        |
+|    124    |     12     |LA       |      109.10       |        0.64        |       171.58        |
+|    129    |     0      |LA       |      175.84       |        1.03        |       171.36        |
+|    129    |     3      |LA       |      134.91       |        0.96        |       140.36        |
+|    129    |     12     |LA       |      120.29       |        0.69        |       175.25        |
+|    130    |     0      |LA       |      102.18       |        0.69        |       148.02        |
+|    130    |     3      |LA       |      142.32       |        0.94        |       151.86        |
+|    130    |     12     |LA       |      170.98       |        0.97        |       176.26        |
+|    132    |     0      |LA       |      164.86       |        1.18        |       139.21        |
+|    132    |     3      |LA       |      159.88       |        0.95        |       168.87        |
+|    132    |     12     |LA       |      156.80       |        0.95        |       165.67        |
+|    134    |     0      |LA       |      121.36       |        0.86        |       140.53        |
+|    134    |     3      |LA       |      117.52       |        0.68        |       173.03        |
+|    134    |     12     |LA       |      166.19       |        0.94        |       176.27        |
+|    140    |     0      |LA       |      135.54       |        0.82        |       166.15        |
+|    140    |     3      |LA       |      123.01       |        0.81        |       152.21        |
+|    140    |     12     |LA       |      145.25       |        0.99        |       147.36        |
+|    149    |     0      |LA       |      111.48       |        0.71        |       157.75        |
+|    149    |     3      |LA       |      120.45       |        0.84        |       143.15        |
+|    149    |     12     |LA       |      133.68       |        0.83        |       160.44        |
+|    151    |     0      |LA       |      101.74       |        0.60        |       170.28        |
+|    151    |     3      |LA       |       92.33       |        0.58        |       160.44        |
+|    151    |     12     |LA       |      108.97       |        0.66        |       166.27        |
+|    119    |     0      |Placebo  |       86.95       |        0.69        |       125.56        |
+|    119    |     3      |Placebo  |      171.00       |        1.29        |       132.47        |
+|    119    |     12     |Placebo  |      185.79       |        1.42        |       131.09        |
+|    120    |     0      |Placebo  |      108.99       |        0.81        |       134.69        |
+|    120    |     12     |Placebo  |      144.20       |        1.00        |       143.82        |
+|    122    |     0      |Placebo  |      124.43       |        0.97        |       127.89        |
+|    122    |     12     |Placebo  |      126.22       |        0.94        |       134.53        |
+|    123    |     0      |Placebo  |       96.34       |        0.63        |       152.45        |
+|    123    |     3      |Placebo  |      131.28       |        1.00        |       131.92        |
+|    123    |     12     |Placebo  |      110.30       |        0.86        |       128.95        |
+|    125    |     0      |Placebo  |       93.27       |        0.74        |       126.19        |
+|    125    |     3      |Placebo  |       91.82       |        0.64        |       143.24        |
+|    125    |     12     |Placebo  |      116.12       |        0.90        |       128.79        |
+|    131    |     0      |Placebo  |      183.91       |        1.47        |       124.82        |
+|    131    |     3      |Placebo  |      129.58       |        1.02        |       126.79        |
+|    131    |     12     |Placebo  |      116.74       |        0.93        |       125.19        |
+|    135    |     0      |Placebo  |      109.98       |        0.71        |       155.24        |
+|    135    |     3      |Placebo  |      133.95       |        0.83        |       160.95        |
+|    135    |     12     |Placebo  |      143.38       |        0.97        |       148.21        |
+|    139    |     0      |Placebo  |      162.97       |        1.16        |       140.65        |
+|    139    |     3      |Placebo  |      156.30       |        1.14        |       137.41        |
+|    139    |     12     |Placebo  |      161.13       |        1.14        |       141.52        |
+|    143    |     0      |Placebo  |      143.55       |        1.14        |       125.84        |
+|    143    |     3      |Placebo  |      169.13       |        1.33        |       127.29        |
+|    143    |     12     |Placebo  |       97.65       |        0.55        |       176.13        |
+|    145    |     0      |Placebo  |      110.28       |        0.90        |       122.08        |
+|    145    |     3      |Placebo  |       97.01       |        0.78        |       123.97        |
+|    145    |     12     |Placebo  |      109.46       |        0.83        |       132.14        |
+|    153    |     0      |Placebo  |      100.72       |        0.69        |       146.84        |
+|    153    |     3      |Placebo  |       93.73       |        0.77        |       121.86        |
+|    153    |     12     |Placebo  |       96.02       |        0.80        |       120.52        |
 
 Aim 2
 
@@ -201,63 +255,10 @@ Mixed effects model using the **lme4** package.
 
 Mixed effects model using the **nlme** package.
 
+*Not executed.*
+The `lme4::lmer()` function is good enough.
 
-|term                         | estimate| std.error| statistic| p.value|
-|:----------------------------|--------:|---------:|---------:|-------:|
-|(Intercept)                  |   155.18|      4.26|     36.42|  0.0000|
-|studyArmPlacebo              |   -20.43|      5.74|     -3.56|  0.0023|
-|visitMonth3                  |     2.29|      5.94|      0.38|  0.7027|
-|visitMonth12                 |    12.04|      5.94|      2.03|  0.0505|
-|studyArmPlacebo:visitMonth3  |    -3.05|      8.21|     -0.37|  0.7121|
-|studyArmPlacebo:visitMonth12 |    -9.43|      8.01|     -1.18|  0.2469|
 
-```
-## Linear mixed-effects model fit by REML
-##  Data: df1 
-##        AIC      BIC    logLik
-##   446.0993 465.6117 -213.0497
-## 
-## Random effects:
-##  Formula: ~1 | patientID
-##         (Intercept)
-## StdDev:    2.169122
-## 
-##  Formula: ~1 | visitMonth %in% patientID
-##         (Intercept) Residual
-## StdDev:      12.213 3.079787
-## 
-## Correlation Structure: AR(1)
-##  Formula: ~1 | patientID/visitMonth 
-##  Parameter estimate(s):
-## Phi 
-##   0 
-## Fixed effects: normalizedConcRatio ~ studyArm * visitMonth 
-##                                  Value Std.Error DF  t-value p-value
-## (Intercept)                  155.17576  4.260250 34 36.42409  0.0000
-## studyArmPlacebo              -20.42675  5.744521 18 -3.55587  0.0023
-## visitMonth3                    2.28511  5.937499 34  0.38486  0.7027
-## visitMonth12                  12.03819  5.937499 34  2.02749  0.0505
-## studyArmPlacebo:visitMonth3   -3.05445  8.209300 34 -0.37207  0.7121
-## studyArmPlacebo:visitMonth12  -9.43367  8.006122 34 -1.17831  0.2469
-##  Correlation: 
-##                              (Intr) stdyAP vstMn3 vstM12 sAP:M3
-## studyArmPlacebo              -0.742                            
-## visitMonth3                  -0.697  0.517                     
-## visitMonth12                 -0.697  0.517  0.500              
-## studyArmPlacebo:visitMonth3   0.504 -0.680 -0.723 -0.362       
-## studyArmPlacebo:visitMonth12  0.517 -0.697 -0.371 -0.742  0.488
-## 
-## Standardized Within-Group Residuals:
-##        Min         Q1        Med         Q3        Max 
-## -0.3919609 -0.1657127 -0.0270804  0.1758109  0.7405603 
-## 
-## Number of Observations: 58
-## Number of Groups: 
-##                 patientID visitMonth %in% patientID 
-##                        20                        58
-```
-
-![plot of chunk normalizedConcRatio-nlme](figures/normalizedConcRatio-nlme-1.png)![plot of chunk normalizedConcRatio-nlme](figures/normalizedConcRatio-nlme-2.png)![plot of chunk normalizedConcRatio-nlme](figures/normalizedConcRatio-nlme-3.png)![plot of chunk normalizedConcRatio-nlme](figures/normalizedConcRatio-nlme-4.png)
 
 
 ## Normalized concentration GSH
@@ -324,63 +325,10 @@ Mixed effects model using the **lme4** package.
 
 Mixed effects model using the **nlme** package.
 
+*Not executed.*
+The `lme4::lmer()` function is good enough.
 
-|term                         | estimate| std.error| statistic| p.value|
-|:----------------------------|--------:|---------:|---------:|-------:|
-|(Intercept)                  |   129.52|      9.15|     14.15|  0.0000|
-|studyArmPlacebo              |    -9.39|     12.34|     -0.76|  0.4565|
-|visitMonth3                  |    -9.74|     10.99|     -0.89|  0.3818|
-|visitMonth12                 |     9.21|     10.99|      0.84|  0.4078|
-|studyArmPlacebo:visitMonth3  |    20.22|     15.27|      1.32|  0.1942|
-|studyArmPlacebo:visitMonth12 |    -1.43|     14.82|     -0.10|  0.9235|
 
-```
-## Linear mixed-effects model fit by REML
-##  Data: df1 
-##        AIC      BIC    logLik
-##   522.1304 541.6428 -251.0652
-## 
-## Random effects:
-##  Formula: ~1 | patientID
-##         (Intercept)
-## StdDev:    14.48532
-## 
-##  Formula: ~1 | visitMonth %in% patientID
-##         (Intercept) Residual
-## StdDev:    21.75406 8.401907
-## 
-## Correlation Structure: AR(1)
-##  Formula: ~1 | patientID/visitMonth 
-##  Parameter estimate(s):
-## Phi 
-##   0 
-## Fixed effects: normalizedConcGSH ~ studyArm * visitMonth 
-##                                  Value Std.Error DF   t-value p-value
-## (Intercept)                  129.51924   9.15093 34 14.153670  0.0000
-## studyArmPlacebo               -9.39040  12.33911 18 -0.761027  0.4565
-## visitMonth3                   -9.74082  10.99324 34 -0.886074  0.3818
-## visitMonth12                   9.21357  10.99324 34  0.838112  0.4078
-## studyArmPlacebo:visitMonth3   20.22153  15.26791 34  1.324447  0.1942
-## studyArmPlacebo:visitMonth12  -1.43372  14.82329 34 -0.096721  0.9235
-##  Correlation: 
-##                              (Intr) stdyAP vstMn3 vstM12 sAP:M3
-## studyArmPlacebo              -0.742                            
-## visitMonth3                  -0.601  0.445                     
-## visitMonth12                 -0.601  0.445  0.500              
-## studyArmPlacebo:visitMonth3   0.432 -0.583 -0.720 -0.360       
-## studyArmPlacebo:visitMonth12  0.445 -0.601 -0.371 -0.742  0.485
-## 
-## Standardized Within-Group Residuals:
-##          Min           Q1          Med           Q3          Max 
-## -0.692412274 -0.212757447  0.003101933  0.198505154  0.842895260 
-## 
-## Number of Observations: 58
-## Number of Groups: 
-##                 patientID visitMonth %in% patientID 
-##                        20                        58
-```
-
-![plot of chunk normalizedConcGSH-nlme](figures/normalizedConcGSH-nlme-1.png)![plot of chunk normalizedConcGSH-nlme](figures/normalizedConcGSH-nlme-2.png)![plot of chunk normalizedConcGSH-nlme](figures/normalizedConcGSH-nlme-3.png)![plot of chunk normalizedConcGSH-nlme](figures/normalizedConcGSH-nlme-4.png)
 
 
 ## Normalized concentration GSSG
@@ -447,60 +395,156 @@ Mixed effects model using the **lme4** package.
 
 Mixed effects model using the **nlme** package.
 
+*Not executed.*
+The `lme4::lmer()` function is good enough.
 
-|term                         | estimate| std.error| statistic| p.value|
-|:----------------------------|--------:|---------:|---------:|-------:|
-|(Intercept)                  |     0.84|      0.07|     12.07|  0.0000|
-|studyArmPlacebo              |     0.06|      0.09|      0.64|  0.5288|
-|visitMonth3                  |    -0.07|      0.09|     -0.85|  0.4033|
-|visitMonth12                 |    -0.01|      0.09|     -0.11|  0.9137|
-|studyArmPlacebo:visitMonth3  |     0.15|      0.12|      1.24|  0.2232|
-|studyArmPlacebo:visitMonth12 |     0.05|      0.12|      0.40|  0.6915|
+
+# Aim 2
+
+
+## 24-month brain atrophy
+
+![figures/scatterplotMatrixBrainAtrophy.png](figures/scatterplotMatrixBrainAtrophy.png)
+
+
+
+Linear model.
+
 
 ```
-## Linear mixed-effects model fit by REML
-##  Data: df1 
-##        AIC     BIC   logLik
-##   16.46336 35.9758 1.768319
 ## 
-## Random effects:
-##  Formula: ~1 | patientID
-##         (Intercept)
-## StdDev:  0.09415466
+## Call:
+## lm(formula = brainAtrophy ~ studyArm, data = df2)
 ## 
-##  Formula: ~1 | visitMonth %in% patientID
-##         (Intercept)   Residual
-## StdDev:    0.175161 0.06433062
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.30438 -0.74248  0.07256  0.59716  1.80694 
 ## 
-## Correlation Structure: AR(1)
-##  Formula: ~1 | patientID/visitMonth 
-##  Parameter estimate(s):
-## Phi 
-##   0 
-## Fixed effects: normalizedConcGSSG ~ studyArm * visitMonth 
-##                                   Value  Std.Error DF   t-value p-value
-## (Intercept)                   0.8411584 0.06966977 34 12.073506  0.0000
-## studyArmPlacebo               0.0603417 0.09394270 18  0.642324  0.5288
-## visitMonth3                  -0.0744497 0.08796437 34 -0.846362  0.4033
-## visitMonth12                 -0.0096006 0.08796437 34 -0.109142  0.9137
-## studyArmPlacebo:visitMonth3   0.1513947 0.12202746 34  1.240661  0.2232
-## studyArmPlacebo:visitMonth12  0.0474676 0.11861114 34  0.400196  0.6915
-##  Correlation: 
-##                              (Intr) stdyAP vstMn3 vstM12 sAP:M3
-## studyArmPlacebo              -0.742                            
-## visitMonth3                  -0.631  0.468                     
-## visitMonth12                 -0.631  0.468  0.500              
-## studyArmPlacebo:visitMonth3   0.455 -0.614 -0.721 -0.360       
-## studyArmPlacebo:visitMonth12  0.468 -0.631 -0.371 -0.742  0.486
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)      -0.2496     0.2889  -0.864   0.3990  
+## studyArmPlacebo  -1.0231     0.3895  -2.627   0.0171 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Standardized Within-Group Residuals:
-##          Min           Q1          Med           Q3          Max 
-## -0.765731854 -0.211667787 -0.005078626  0.172921662  0.894283472 
-## 
-## Number of Observations: 58
-## Number of Groups: 
-##                 patientID visitMonth %in% patientID 
-##                        20                        58
+## Residual standard error: 0.8666 on 18 degrees of freedom
+## Multiple R-squared:  0.2771,	Adjusted R-squared:  0.2369 
+## F-statistic: 6.899 on 1 and 18 DF,  p-value: 0.01711
 ```
 
-![plot of chunk normalizedConcGSSG-nlme](figures/normalizedConcGSSG-nlme-1.png)![plot of chunk normalizedConcGSSG-nlme](figures/normalizedConcGSSG-nlme-2.png)![plot of chunk normalizedConcGSSG-nlme](figures/normalizedConcGSSG-nlme-3.png)![plot of chunk normalizedConcGSSG-nlme](figures/normalizedConcGSSG-nlme-4.png)
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ studyArm + pctChangeConcRatio, data = df2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.28391 -0.73332  0.04088  0.57735  1.81193 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)        -0.232099   0.324069  -0.716   0.4836  
+## studyArmPlacebo    -1.035179   0.410478  -2.522   0.0219 *
+## pctChangeConcRatio -0.001996   0.014784  -0.135   0.8942  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.8913 on 17 degrees of freedom
+## Multiple R-squared:  0.2779,	Adjusted R-squared:  0.1929 
+## F-statistic:  3.27 on 2 and 17 DF,  p-value: 0.06285
+```
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ studyArm + pctChangeConcRatio + concRatioM0, 
+##     data = df2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.33150 -0.65546  0.01787  0.56680  1.85827 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)
+## (Intercept)        -1.690900   3.885431  -0.435    0.669
+## studyArmPlacebo    -0.812243   0.726248  -1.118    0.280
+## pctChangeConcRatio  0.004305   0.022578   0.191    0.851
+## concRatioM0         0.009045   0.024003   0.377    0.711
+## 
+## Residual standard error: 0.9146 on 16 degrees of freedom
+## Multiple R-squared:  0.2842,	Adjusted R-squared:   0.15 
+## F-statistic: 2.118 on 3 and 16 DF,  p-value: 0.1382
+```
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ studyArm + pctChangeConcRatio + invConcRatioM0, 
+##     data = df2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.34758 -0.60897  0.00814  0.54426  1.88351 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(>|t|)
+## (Intercept)         1.451e+00  3.111e+00   0.466    0.647
+## studyArmPlacebo    -7.167e-01  7.200e-01  -0.995    0.334
+## pctChangeConcRatio  6.947e-03  2.232e-02   0.311    0.760
+## invConcRatioM0     -2.711e+02  4.982e+02  -0.544    0.594
+## 
+## Residual standard error: 0.9103 on 16 degrees of freedom
+## Multiple R-squared:  0.291,	Adjusted R-squared:  0.158 
+## F-statistic: 2.189 on 3 and 16 DF,  p-value: 0.1291
+```
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ studyArm + concRatioM0, data = df2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.30458 -0.67572 -0.00435  0.55146  1.84576 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)     -1.127281   2.448976  -0.460    0.651  
+## studyArmPlacebo -0.907550   0.511691  -1.774    0.094 .
+## concRatioM0      0.005656   0.015666   0.361    0.723  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.8883 on 17 degrees of freedom
+## Multiple R-squared:  0.2826,	Adjusted R-squared:  0.1982 
+## F-statistic: 3.348 on 2 and 17 DF,  p-value: 0.05944
+```
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ studyArm + invConcRatioM0, data = df2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.31699 -0.63864 -0.02853  0.55657  1.86130 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)
+## (Intercept)        0.7701     2.1519   0.358    0.725
+## studyArmPlacebo   -0.8701     0.5107  -1.704    0.107
+## invConcRatioM0  -156.9111   328.0185  -0.478    0.638
+## 
+## Residual standard error: 0.8858 on 17 degrees of freedom
+## Multiple R-squared:  0.2867,	Adjusted R-squared:  0.2028 
+## F-statistic: 3.416 on 2 and 17 DF,  p-value: 0.05661
+```
+
+
+|term            | estimate| std.error| statistic| p.value|
+|:---------------|--------:|---------:|---------:|-------:|
+|(Intercept)     |     0.77|      2.15|      0.36|    0.72|
+|studyArmPlacebo |    -0.87|      0.51|     -1.70|    0.11|
+|invConcRatioM0  |  -156.91|    328.02|     -0.48|    0.64|
+
+![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-1.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-2.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-3.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-4.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-5.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-6.png)

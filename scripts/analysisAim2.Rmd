@@ -40,7 +40,7 @@ M <- update(M, . ~ studyArm + invConcRatioM0)
 summary(M)
 ```
 
-```{r}
+```{r brainAtrophyDiagnostics}
 tidy(M) %>% kable(digits = 2)
 res <- residuals(M)
 plot(res)

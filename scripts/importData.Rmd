@@ -151,6 +151,10 @@ df1 <-
   df %>% 
   select(-brainAtrophy)
 str(df1)
+df1 %>% 
+  arrange(studyArm, patientID) %>% 
+  select(-c(sampleID, normalizedConcStdEGSH, normalizedConcStdEGSSG)) %>% 
+  kable(align = c("cclccc"), digits = 2)
 ```
 
 Aim 2

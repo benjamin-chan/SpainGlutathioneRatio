@@ -1,5 +1,25 @@
 # Aim 1
 
+The model for Aim 1 will be a random intercept linear model.
+Estimation will use the *lme4* package.
+
+```{r}
+citation("lme4")
+```
+
+The model is
+
+$$
+\begin{align*}
+y_{i j} = & \beta_0 \\
+          & + \beta_1 x_{\text{placebo}, i} + \beta_2 x_{\text{month 3}, i} + \beta_3 x_{\text{month 12}, i} \\
+          & + \beta_4 x_{\text{placebo}, i} x_{\text{month 3}, i} + \beta_5 x_{\text{placebo}, i} x_{\text{month 12}, i} \\
+          & + u_j + e_{i j} \\
+\end{align*}
+$$
+
+where $u_j$ is the random intercept component and $e_{i j}$ is the random error.
+
 
 ## Normalized GSH:GSSG concentration ratio
 
@@ -183,3 +203,6 @@ qqnorm(res)
 plot(M)
 rm(M, res)
 ```
+
+
+## Interpretation

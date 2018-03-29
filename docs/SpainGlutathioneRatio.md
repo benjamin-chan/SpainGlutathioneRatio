@@ -1,6 +1,6 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-03-19"
+date: "2018-03-29"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
@@ -185,6 +185,45 @@ Aim 2
 |145       |Placebo  |      122.08|       132.14|               8.25|        -2.01|
 |153       |Placebo  |      146.84|       120.52|             -17.93|        -1.22|
 # Aim 1
+
+The model for Aim 1 will be a random intercept linear model.
+Estimation will use the *lme4* package.
+
+
+```
+## 
+## To cite lme4 in publications use:
+## 
+##   Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015).
+##   Fitting Linear Mixed-Effects Models Using lme4. Journal of
+##   Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Article{,
+##     title = {Fitting Linear Mixed-Effects Models Using {lme4}},
+##     author = {Douglas Bates and Martin M{\"a}chler and Ben Bolker and Steve Walker},
+##     journal = {Journal of Statistical Software},
+##     year = {2015},
+##     volume = {67},
+##     number = {1},
+##     pages = {1--48},
+##     doi = {10.18637/jss.v067.i01},
+##   }
+```
+
+The model is
+
+$$
+\begin{align*}
+y_{i j} = & \beta_0 \\
+          & + \beta_1 x_{\text{placebo}, i} + \beta_2 x_{\text{month 3}, i} + \beta_3 x_{\text{month 12}, i} \\
+          & + \beta_4 x_{\text{placebo}, i} x_{\text{month 3}, i} + \beta_5 x_{\text{placebo}, i} x_{\text{month 12}, i} \\
+          & + u_j + e_{i j} \\
+\end{align*}
+$$
+
+where $u_j$ is the random intercept component and $e_{i j}$ is the random error.
 
 
 ## Normalized GSH:GSSG concentration ratio
@@ -399,7 +438,21 @@ Mixed effects model using the **nlme** package.
 The `lme4::lmer()` function is good enough.
 
 
+
+
+## Interpretation
 # Aim 2
+
+The model for Aim 2 will be a linear regression model.
+
+The model is
+
+$$
+y_{i} =
+\beta_0
++ \beta_1 x_{\text{placebo}, i}
++ e_{i}
+$$
 
 
 ## 24-month brain atrophy
@@ -548,3 +601,6 @@ Linear model.
 |invConcRatioM0  |  -156.91|    328.02|     -0.48|    0.64|
 
 ![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-1.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-2.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-3.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-4.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-5.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-6.png)
+
+
+## Interpretation

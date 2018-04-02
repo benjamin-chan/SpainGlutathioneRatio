@@ -1,12 +1,18 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-03-29"
+date: "2018-04-02"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
     toc: true
     theme: simplex
 ---
+
+
+
+
+
+
 
 
 
@@ -184,6 +190,9 @@ Aim 2
 |143       |Placebo  |      125.84|       176.13|              39.96|        -1.74|
 |145       |Placebo  |      122.08|       132.14|               8.25|        -2.01|
 |153       |Placebo  |      146.84|       120.52|             -17.93|        -1.22|
+
+
+
 # Aim 1
 
 The model for Aim 1 will be a random intercept linear model.
@@ -223,7 +232,9 @@ y_{i j} = & \beta_0 \\
 \end{align*}
 $$
 
-where $u_j$ is the random intercept component and $e_{i j}$ is the random error.
+where 
+$u_j$ is the random intercept component for each study subject $j$, and 
+$e_{i j}$ is the random error.
 
 
 ## Normalized GSH:GSSG concentration ratio
@@ -239,16 +250,17 @@ where $u_j$ is the random intercept component and $e_{i j}$ is the random error.
 Mixed effects model using the **lme4** package.
 
 
-|term                         | estimate| std.error| statistic|group     |
-|:----------------------------|--------:|---------:|---------:|:---------|
-|(Intercept)                  |   155.18|      4.26|     36.42|fixed     |
-|studyArmPlacebo              |   -20.43|      5.74|     -3.56|fixed     |
-|visitMonth3                  |     2.29|      5.94|      0.38|fixed     |
-|visitMonth12                 |    12.04|      5.94|      2.03|fixed     |
-|studyArmPlacebo:visitMonth3  |    -3.05|      8.21|     -0.37|fixed     |
-|studyArmPlacebo:visitMonth12 |    -9.43|      8.01|     -1.18|fixed     |
-|sd_(Intercept).patientID     |     2.17|        NA|        NA|patientID |
-|sd_Observation.Residual      |    12.60|        NA|        NA|Residual  |
+|term                         | estimate| std.error| statistic| df| pvalue|
+|:----------------------------|--------:|---------:|---------:|--:|------:|
+|(Intercept)                  |   155.18|      4.26|     36.42| 34| 0.0000|
+|studyArmPlacebo              |   -20.43|      5.74|     -3.56| 18| 0.0023|
+|visitMonth3                  |     2.29|      5.94|      0.38| 34| 0.7027|
+|visitMonth12                 |    12.04|      5.94|      2.03| 34| 0.0505|
+|studyArmPlacebo:visitMonth3  |    -3.05|      8.21|     -0.37| 34| 0.7121|
+|studyArmPlacebo:visitMonth12 |    -9.43|      8.01|     -1.18| 34| 0.2469|
+
+Details.
+
 
 ```
 ## Linear mixed model fit by REML ['lmerMod']
@@ -309,16 +321,17 @@ The `lme4::lmer()` function is good enough.
 Mixed effects model using the **lme4** package.
 
 
-|term                         | estimate| std.error| statistic|group     |
-|:----------------------------|--------:|---------:|---------:|:---------|
-|(Intercept)                  |   129.52|      9.15|     14.15|fixed     |
-|studyArmPlacebo              |    -9.39|     12.34|     -0.76|fixed     |
-|visitMonth3                  |    -9.74|     10.99|     -0.89|fixed     |
-|visitMonth12                 |     9.21|     10.99|      0.84|fixed     |
-|studyArmPlacebo:visitMonth3  |    20.22|     15.27|      1.32|fixed     |
-|studyArmPlacebo:visitMonth12 |    -1.43|     14.82|     -0.10|fixed     |
-|sd_(Intercept).patientID     |    14.49|        NA|        NA|patientID |
-|sd_Observation.Residual      |    23.32|        NA|        NA|Residual  |
+|term                         | estimate| std.error| statistic| df| pvalue|
+|:----------------------------|--------:|---------:|---------:|--:|------:|
+|(Intercept)                  |   129.52|      9.15|     14.15| 34| 0.0000|
+|studyArmPlacebo              |    -9.39|     12.34|     -0.76| 18| 0.4565|
+|visitMonth3                  |    -9.74|     10.99|     -0.89| 34| 0.3818|
+|visitMonth12                 |     9.21|     10.99|      0.84| 34| 0.4078|
+|studyArmPlacebo:visitMonth3  |    20.22|     15.27|      1.32| 34| 0.1942|
+|studyArmPlacebo:visitMonth12 |    -1.43|     14.82|     -0.10| 34| 0.9235|
+
+Details.
+
 
 ```
 ## Linear mixed model fit by REML ['lmerMod']
@@ -379,16 +392,17 @@ The `lme4::lmer()` function is good enough.
 Mixed effects model using the **lme4** package.
 
 
-|term                         | estimate| std.error| statistic|group     |
-|:----------------------------|--------:|---------:|---------:|:---------|
-|(Intercept)                  |     0.84|      0.07|     12.07|fixed     |
-|studyArmPlacebo              |     0.06|      0.09|      0.64|fixed     |
-|visitMonth3                  |    -0.07|      0.09|     -0.85|fixed     |
-|visitMonth12                 |    -0.01|      0.09|     -0.11|fixed     |
-|studyArmPlacebo:visitMonth3  |     0.15|      0.12|      1.24|fixed     |
-|studyArmPlacebo:visitMonth12 |     0.05|      0.12|      0.40|fixed     |
-|sd_(Intercept).patientID     |     0.09|        NA|        NA|patientID |
-|sd_Observation.Residual      |     0.19|        NA|        NA|Residual  |
+|term                         | estimate| std.error| statistic| df| pvalue|
+|:----------------------------|--------:|---------:|---------:|--:|------:|
+|(Intercept)                  |     0.84|      0.07|     12.07| 34| 0.0000|
+|studyArmPlacebo              |     0.06|      0.09|      0.64| 18| 0.5288|
+|visitMonth3                  |    -0.07|      0.09|     -0.85| 34| 0.4033|
+|visitMonth12                 |    -0.01|      0.09|     -0.11| 34| 0.9137|
+|studyArmPlacebo:visitMonth3  |     0.15|      0.12|      1.24| 34| 0.2232|
+|studyArmPlacebo:visitMonth12 |     0.05|      0.12|      0.40| 34| 0.6915|
+
+Details.
+
 
 ```
 ## Linear mixed model fit by REML ['lmerMod']
@@ -441,6 +455,21 @@ The `lme4::lmer()` function is good enough.
 
 
 ## Interpretation
+
+
+
+* Normalized concentration ratio was significantly different between placebo and LA
+  * Difference between placebo and LA at baseline visit was -20.4 (p-value = 0.0023)
+  * Difference between placebo and LA at 3-month visit was -23.5 (p-value = 0.0011)
+  * Difference between placebo and LA at 12-month visit was -29.9 (p-value = 6.1 &times; 10<sup>-5</sup>)
+  * Difference between placebo and LA at baseline visit was not significantly different compared to month 3 or month 12 visits (i.e., difference between placebo and LA was significant at **all visits**)
+  * Global difference between placebo and LA was -24.5 (p-value = 1.3 &times; 10<sup>-6</sup>)
+*  Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
+*  Normalized GSH concentration was not significantly different between study arm or visits
+*  Normalized GSSG concentration was not significantly different between study arm or visits
+
+
+
 # Aim 2
 
 The model for Aim 2 will be a linear regression model.
@@ -604,3 +633,6 @@ Linear model.
 
 
 ## Interpretation
+
+
+

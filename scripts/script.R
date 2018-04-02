@@ -15,6 +15,7 @@ f <- file("master.Rmd", open = "w")
 for (i in 1:length(files)) {
     x <- readLines(file.path("scripts", files[i]))
     writeLines(x, f)
+    writeLines("\n\n", f)
 }
 close(f)
 library(knitr)

@@ -18,7 +18,9 @@ y_{i j} = & \beta_0 \\
 \end{align*}
 $$
 
-where $u_j$ is the random intercept component and $e_{i j}$ is the random error.
+where 
+$u_j$ is the random intercept component for each study subject $j$, and 
+$e_{i j}$ is the random error.
 
 
 ## Normalized GSH:GSSG concentration ratio
@@ -61,10 +63,27 @@ ggsave("figures/plotNormalizedConcSlope.png", width = 6, height = 4)
 
 Mixed effects model using the **lme4** package.
 
-```{r normalizedConcRatio-lme4}
+```{r}
+tableFixedEffects <- function (lme4Obj) {
+  degf1 <- summary(lme4Obj)$devcomp$dims["q"] - 2
+  degf2 <- summary(lme4Obj)$devcomp$dims["N"] - (summary(lme4Obj)$devcomp$dims["p"] - 1) - (summary(lme4Obj)$devcomp$dims["q"] - 1)
+  coef <-
+    tidy(lme4Obj) %>% 
+    filter(group == "fixed") %>% 
+    select(-group) %>% 
+    mutate(df = c(degf2, degf1, rep(degf2, 4))) %>% 
+    mutate(pvalue = 2 * pt(abs(statistic), df, lower.tail = FALSE))
+  coef
+}
 M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
           data = df1)
-tidy(M) %>% kable(digits = 2)
+beta1 <- M %>% tableFixedEffects()
+beta1 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
+```
+
+Details.
+
+```{r normalizedConcRatio-lme4}
 summary(M)
 plot(ranef(M))
 res <- residuals(M)
@@ -116,10 +135,16 @@ ggsave("figures/lineplotNormalizedConcGSH.png", width = 6, height = 4)
 
 Mixed effects model using the **lme4** package.
 
-```{r normalizedConcGSH-lme4}
+```{r}
 M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID),
           data = df1)
-tidy(M) %>% kable(digits = 2)
+beta2 <- M %>% tableFixedEffects()
+beta2 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
+```
+
+Details.
+
+```{r normalizedConcGSH-lme4}
 summary(M)
 plot(ranef(M))
 res <- residuals(M)
@@ -171,10 +196,16 @@ ggsave("figures/lineplotNormalizedConcGSSG.png", width = 6, height = 4)
 
 Mixed effects model using the **lme4** package.
 
-```{r normalizedConcGSSG-lme4}
+```{r}
 M <- lmer(normalizedConcGSSG ~ studyArm * visitMonth + (1 | patientID),
           data = df1)
-tidy(M) %>% kable(digits = 2)
+beta3 <- M %>% tableFixedEffects()
+beta3 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
+```
+
+Details.
+
+```{r normalizedConcGSSG-lme4}
 summary(M)
 plot(ranef(M))
 res <- residuals(M)
@@ -206,3 +237,32 @@ rm(M, res)
 
 
 ## Interpretation
+
+```{r}
+M <- lmer(normalizedConcRatio ~ studyArm + (1 | patientID),
+          data = df1)
+degf1 <- summary(M)$devcomp$dims["q"] - 2
+degf2 <- summary(M)$devcomp$dims["N"] - (summary(M)$devcomp$dims["p"] - 1) - (summary(M)$devcomp$dims["q"] - 1)
+beta4 <-
+  tidy(M) %>% 
+  filter(group == "fixed") %>% 
+  select(-group) %>% 
+  mutate(df = c(degf2, degf1)) %>% 
+  mutate(pvalue = 2 * pt(abs(statistic), df, lower.tail = FALSE))
+M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
+          data = df1 %>% mutate(visitMonth = relevel(visitMonth, 2)))
+beta5 <- M %>% tableFixedEffects()
+M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
+          data = df1 %>% mutate(visitMonth = relevel(visitMonth, 3)))
+beta6 <- M %>% tableFixedEffects()
+```
+
+* Normalized concentration ratio was significantly different between placebo and LA
+  * Difference between placebo and LA at baseline visit was `r beta1 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
+  * Difference between placebo and LA at 3-month visit was `r beta5 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta5 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
+  * Difference between placebo and LA at 12-month visit was `r beta6 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta6 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
+  * Difference between placebo and LA at baseline visit was not significantly different compared to month 3 or month 12 visits (i.e., difference between placebo and LA was significant at **all visits**)
+  * Global difference between placebo and LA was `r beta4 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta4 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
+*  Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
+*  Normalized GSH concentration was not significantly different between study arm or visits
+*  Normalized GSSG concentration was not significantly different between study arm or visits

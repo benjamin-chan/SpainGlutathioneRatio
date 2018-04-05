@@ -1,6 +1,6 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-04-02"
+date: "2018-04-05"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
@@ -259,50 +259,9 @@ Mixed effects model using the **lme4** package.
 |studyArmPlacebo:visitMonth3  |    -3.05|      8.21|     -0.37| 34| 0.7121|
 |studyArmPlacebo:visitMonth12 |    -9.43|      8.01|     -1.18| 34| 0.2469|
 
-Details.
+Details (not shown).
 
 
-```
-## Linear mixed model fit by REML ['lmerMod']
-## Formula: normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID)
-##    Data: df1
-## 
-## REML criterion at convergence: 426.1
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -1.6030 -0.6777 -0.1108  0.7190  3.0286 
-## 
-## Random effects:
-##  Groups    Name        Variance Std.Dev.
-##  patientID (Intercept)   4.705   2.169  
-##  Residual              158.643  12.595  
-## Number of obs: 58, groups:  patientID, 20
-## 
-## Fixed effects:
-##                              Estimate Std. Error t value
-## (Intercept)                   155.176      4.260   36.42
-## studyArmPlacebo               -20.427      5.745   -3.56
-## visitMonth3                     2.285      5.937    0.38
-## visitMonth12                   12.038      5.937    2.03
-## studyArmPlacebo:visitMonth3    -3.054      8.209   -0.37
-## studyArmPlacebo:visitMonth12   -9.434      8.006   -1.18
-## 
-## Correlation of Fixed Effects:
-##             (Intr) stdyAP vstMn3 vstM12 sAP:M3
-## stdyArmPlcb -0.742                            
-## visitMonth3 -0.697  0.517                     
-## visitMnth12 -0.697  0.517  0.500              
-## stdyArmP:M3  0.504 -0.680 -0.723 -0.362       
-## stdyArP:M12  0.517 -0.697 -0.371 -0.742  0.488
-```
-
-```
-## $patientID
-```
-
-![plot of chunk normalizedConcRatio-lme4](figures/normalizedConcRatio-lme4-1.png)
-![plot of chunk normalizedConcRatio-lme4](figures/normalizedConcRatio-lme4-2.png)![plot of chunk normalizedConcRatio-lme4](figures/normalizedConcRatio-lme4-3.png)![plot of chunk normalizedConcRatio-lme4](figures/normalizedConcRatio-lme4-4.png)
 
 Mixed effects model using the **nlme** package.
 
@@ -330,50 +289,9 @@ Mixed effects model using the **lme4** package.
 |studyArmPlacebo:visitMonth3  |    20.22|     15.27|      1.32| 34| 0.1942|
 |studyArmPlacebo:visitMonth12 |    -1.43|     14.82|     -0.10| 34| 0.9235|
 
-Details.
+Details (not shown).
 
 
-```
-## Linear mixed model fit by REML ['lmerMod']
-## Formula: normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID)
-##    Data: df1
-## 
-## REML criterion at convergence: 502.1
-## 
-## Scaled residuals: 
-##      Min       1Q   Median       3Q      Max 
-## -1.92185 -0.59053  0.00861  0.55097  2.33953 
-## 
-## Random effects:
-##  Groups    Name        Variance Std.Dev.
-##  patientID (Intercept) 209.8    14.49   
-##  Residual              543.8    23.32   
-## Number of obs: 58, groups:  patientID, 20
-## 
-## Fixed effects:
-##                              Estimate Std. Error t value
-## (Intercept)                   129.519      9.151  14.154
-## studyArmPlacebo                -9.390     12.339  -0.761
-## visitMonth3                    -9.741     10.993  -0.886
-## visitMonth12                    9.214     10.993   0.838
-## studyArmPlacebo:visitMonth3    20.222     15.268   1.324
-## studyArmPlacebo:visitMonth12   -1.434     14.823  -0.097
-## 
-## Correlation of Fixed Effects:
-##             (Intr) stdyAP vstMn3 vstM12 sAP:M3
-## stdyArmPlcb -0.742                            
-## visitMonth3 -0.601  0.445                     
-## visitMnth12 -0.601  0.445  0.500              
-## stdyArmP:M3  0.432 -0.583 -0.720 -0.360       
-## stdyArP:M12  0.445 -0.601 -0.371 -0.742  0.485
-```
-
-```
-## $patientID
-```
-
-![plot of chunk normalizedConcGSH-lme4](figures/normalizedConcGSH-lme4-1.png)
-![plot of chunk normalizedConcGSH-lme4](figures/normalizedConcGSH-lme4-2.png)![plot of chunk normalizedConcGSH-lme4](figures/normalizedConcGSH-lme4-3.png)![plot of chunk normalizedConcGSH-lme4](figures/normalizedConcGSH-lme4-4.png)
 
 Mixed effects model using the **nlme** package.
 
@@ -401,50 +319,9 @@ Mixed effects model using the **lme4** package.
 |studyArmPlacebo:visitMonth3  |     0.15|      0.12|      1.24| 34| 0.2232|
 |studyArmPlacebo:visitMonth12 |     0.05|      0.12|      0.40| 34| 0.6915|
 
-Details.
+Details (not shown).
 
 
-```
-## Linear mixed model fit by REML ['lmerMod']
-## Formula: normalizedConcGSSG ~ studyArm * visitMonth + (1 | patientID)
-##    Data: df1
-## 
-## REML criterion at convergence: -3.5
-## 
-## Scaled residuals: 
-##      Min       1Q   Median       3Q      Max 
-## -2.22112 -0.61397 -0.01473  0.50159  2.59400 
-## 
-## Random effects:
-##  Groups    Name        Variance Std.Dev.
-##  patientID (Intercept) 0.008865 0.09415 
-##  Residual              0.034820 0.18660 
-## Number of obs: 58, groups:  patientID, 20
-## 
-## Fixed effects:
-##                               Estimate Std. Error t value
-## (Intercept)                   0.841158   0.069670  12.074
-## studyArmPlacebo               0.060342   0.093943   0.642
-## visitMonth3                  -0.074450   0.087964  -0.846
-## visitMonth12                 -0.009601   0.087964  -0.109
-## studyArmPlacebo:visitMonth3   0.151395   0.122027   1.241
-## studyArmPlacebo:visitMonth12  0.047468   0.118611   0.400
-## 
-## Correlation of Fixed Effects:
-##             (Intr) stdyAP vstMn3 vstM12 sAP:M3
-## stdyArmPlcb -0.742                            
-## visitMonth3 -0.631  0.468                     
-## visitMnth12 -0.631  0.468  0.500              
-## stdyArmP:M3  0.455 -0.614 -0.721 -0.360       
-## stdyArP:M12  0.468 -0.631 -0.371 -0.742  0.486
-```
-
-```
-## $patientID
-```
-
-![plot of chunk normalizedConcGSSG-lme4](figures/normalizedConcGSSG-lme4-1.png)
-![plot of chunk normalizedConcGSSG-lme4](figures/normalizedConcGSSG-lme4-2.png)![plot of chunk normalizedConcGSSG-lme4](figures/normalizedConcGSSG-lme4-3.png)![plot of chunk normalizedConcGSSG-lme4](figures/normalizedConcGSSG-lme4-4.png)
 
 Mixed effects model using the **nlme** package.
 
@@ -458,15 +335,21 @@ The `lme4::lmer()` function is good enough.
 
 
 
+
+
 * Normalized concentration ratio was significantly different between placebo and LA
   * Difference between placebo and LA at baseline visit was -20.4 (p-value = 0.0023)
   * Difference between placebo and LA at 3-month visit was -23.5 (p-value = 0.0011)
   * Difference between placebo and LA at 12-month visit was -29.9 (p-value = 6.1 &times; 10<sup>-5</sup>)
   * Difference between placebo and LA at baseline visit was not significantly different compared to month 3 or month 12 visits (i.e., difference between placebo and LA was significant at **all visits**)
   * Global difference between placebo and LA was -24.5 (p-value = 1.3 &times; 10<sup>-6</sup>)
-*  Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
-*  Normalized GSH concentration was not significantly different between study arm or visits
-*  Normalized GSSG concentration was not significantly different between study arm or visits
+* Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
+  * Among LA: difference between 3-month visit and baseline was 2.29 (p-value = 0.7)
+  * Among LA: difference between 12-month visit and baseline was 12 (p-value = 0.051)
+  * Among placebo: difference between 3-month visit and baseline was -0.769 (p-value = 0.89)
+  * Among placebo: difference between 12-month visit and baseline was 2.6 (p-value = 0.63)
+* Normalized GSH concentration was not significantly different between study arm or visits
+* Normalized GSSG concentration was not significantly different between study arm or visits
 
 
 
@@ -485,6 +368,10 @@ $$
 
 
 ## 24-month brain atrophy
+
+![figures/boxplotBrainAtrophy.png](figures/boxplotBrainAtrophy.png)
+
+
 
 ![figures/scatterplotMatrixBrainAtrophy.png](figures/scatterplotMatrixBrainAtrophy.png)
 
@@ -514,6 +401,18 @@ Linear model.
 ## F-statistic: 6.899 on 1 and 18 DF,  p-value: 0.01711
 ```
 
+
+
+|term            | estimate| std.error| statistic| p.value|
+|:---------------|--------:|---------:|---------:|-------:|
+|(Intercept)     |    -0.25|      0.29|     -0.86|  0.3990|
+|studyArmPlacebo |    -1.02|      0.39|     -2.63|  0.0171|
+
+Details (not shown).
+
+
+
+
 ```
 ## 
 ## Call:
@@ -539,50 +438,6 @@ Linear model.
 ```
 ## 
 ## Call:
-## lm(formula = brainAtrophy ~ studyArm + pctChangeConcRatio + concRatioM0, 
-##     data = df2)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.33150 -0.65546  0.01787  0.56680  1.85827 
-## 
-## Coefficients:
-##                     Estimate Std. Error t value Pr(>|t|)
-## (Intercept)        -1.690900   3.885431  -0.435    0.669
-## studyArmPlacebo    -0.812243   0.726248  -1.118    0.280
-## pctChangeConcRatio  0.004305   0.022578   0.191    0.851
-## concRatioM0         0.009045   0.024003   0.377    0.711
-## 
-## Residual standard error: 0.9146 on 16 degrees of freedom
-## Multiple R-squared:  0.2842,	Adjusted R-squared:   0.15 
-## F-statistic: 2.118 on 3 and 16 DF,  p-value: 0.1382
-```
-
-```
-## 
-## Call:
-## lm(formula = brainAtrophy ~ studyArm + pctChangeConcRatio + invConcRatioM0, 
-##     data = df2)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.34758 -0.60897  0.00814  0.54426  1.88351 
-## 
-## Coefficients:
-##                      Estimate Std. Error t value Pr(>|t|)
-## (Intercept)         1.451e+00  3.111e+00   0.466    0.647
-## studyArmPlacebo    -7.167e-01  7.200e-01  -0.995    0.334
-## pctChangeConcRatio  6.947e-03  2.232e-02   0.311    0.760
-## invConcRatioM0     -2.711e+02  4.982e+02  -0.544    0.594
-## 
-## Residual standard error: 0.9103 on 16 degrees of freedom
-## Multiple R-squared:  0.291,	Adjusted R-squared:  0.158 
-## F-statistic: 2.189 on 3 and 16 DF,  p-value: 0.1291
-```
-
-```
-## 
-## Call:
 ## lm(formula = brainAtrophy ~ studyArm + concRatioM0, data = df2)
 ## 
 ## Residuals:
@@ -602,37 +457,15 @@ Linear model.
 ## F-statistic: 3.348 on 2 and 17 DF,  p-value: 0.05944
 ```
 
-```
-## 
-## Call:
-## lm(formula = brainAtrophy ~ studyArm + invConcRatioM0, data = df2)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.31699 -0.63864 -0.02853  0.55657  1.86130 
-## 
-## Coefficients:
-##                  Estimate Std. Error t value Pr(>|t|)
-## (Intercept)        0.7701     2.1519   0.358    0.725
-## studyArmPlacebo   -0.8701     0.5107  -1.704    0.107
-## invConcRatioM0  -156.9111   328.0185  -0.478    0.638
-## 
-## Residual standard error: 0.8858 on 17 degrees of freedom
-## Multiple R-squared:  0.2867,	Adjusted R-squared:  0.2028 
-## F-statistic: 3.416 on 2 and 17 DF,  p-value: 0.05661
-```
-
-
-|term            | estimate| std.error| statistic| p.value|
-|:---------------|--------:|---------:|---------:|-------:|
-|(Intercept)     |     0.77|      2.15|      0.36|    0.72|
-|studyArmPlacebo |    -0.87|      0.51|     -1.70|    0.11|
-|invConcRatioM0  |  -156.91|    328.02|     -0.48|    0.64|
-
-![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-1.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-2.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-3.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-4.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-5.png)![plot of chunk brainAtrophyDiagnostics](figures/brainAtrophyDiagnostics-6.png)
-
 
 ## Interpretation
+
+* Percent brain atrophy was significantly different in the placebo group compared to the LA group
+  * Difference of -1.02 (p-value = 0.0171)
+* The difference persisted after adjusting for percent change in GSH:GSSG concentration ratio from baseline to 12-month visit
+  * Difference of -1.04 (p-value = 0.0219)
+* The difference was attenuated after adjusting for baseline GSH:GSSG concentration ratio
+  * Difference of -0.908 (p-value = 0.094)
 
 
 

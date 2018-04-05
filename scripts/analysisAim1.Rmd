@@ -81,9 +81,9 @@ beta1 <- M %>% tableFixedEffects()
 beta1 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
 ```
 
-Details.
+Details (not shown).
 
-```{r normalizedConcRatio-lme4}
+```{r normalizedConcRatio-lme4, results = "hide", fig.show = "hide"}
 summary(M)
 plot(ranef(M))
 res <- residuals(M)
@@ -142,9 +142,9 @@ beta2 <- M %>% tableFixedEffects()
 beta2 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
 ```
 
-Details.
+Details (not shown).
 
-```{r normalizedConcGSH-lme4}
+```{r normalizedConcGSH-lme4, results = "hide", fig.show = "hide"}
 summary(M)
 plot(ranef(M))
 res <- residuals(M)
@@ -203,9 +203,9 @@ beta3 <- M %>% tableFixedEffects()
 beta3 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
 ```
 
-Details.
+Details (not shown).
 
-```{r normalizedConcGSSG-lme4}
+```{r normalizedConcGSSG-lme4, results = "hide", fig.show = "hide"}
 summary(M)
 plot(ranef(M))
 res <- residuals(M)
@@ -255,6 +255,31 @@ beta5 <- M %>% tableFixedEffects()
 M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
           data = df1 %>% mutate(visitMonth = relevel(visitMonth, 3)))
 beta6 <- M %>% tableFixedEffects()
+M <- lmer(normalizedConcRatio ~ studyArm * visitMonth + (1 | patientID),
+          data = df1 %>% mutate(studyArm = relevel(studyArm, 2)))
+beta7 <- M %>% tableFixedEffects()
+```
+
+```{r}
+M <- lmer(normalizedConcGSH ~ studyArm + (1 | patientID),
+          data = df1)
+degf1 <- summary(M)$devcomp$dims["q"] - 2
+degf2 <- summary(M)$devcomp$dims["N"] - (summary(M)$devcomp$dims["p"] - 1) - (summary(M)$devcomp$dims["q"] - 1)
+beta8 <-
+  tidy(M) %>% 
+  filter(group == "fixed") %>% 
+  select(-group) %>% 
+  mutate(df = c(degf2, degf1)) %>% 
+  mutate(pvalue = 2 * pt(abs(statistic), df, lower.tail = FALSE))
+M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID),
+          data = df1 %>% mutate(visitMonth = relevel(visitMonth, 2)))
+beta9 <- M %>% tableFixedEffects()
+M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID),
+          data = df1 %>% mutate(visitMonth = relevel(visitMonth, 3)))
+beta10 <- M %>% tableFixedEffects()
+M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID),
+          data = df1 %>% mutate(studyArm = relevel(studyArm, 2)))
+beta11 <- M %>% tableFixedEffects()
 ```
 
 * Normalized concentration ratio was significantly different between placebo and LA
@@ -263,6 +288,10 @@ beta6 <- M %>% tableFixedEffects()
   * Difference between placebo and LA at 12-month visit was `r beta6 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta6 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
   * Difference between placebo and LA at baseline visit was not significantly different compared to month 3 or month 12 visits (i.e., difference between placebo and LA was significant at **all visits**)
   * Global difference between placebo and LA was `r beta4 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta4 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
-*  Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
-*  Normalized GSH concentration was not significantly different between study arm or visits
-*  Normalized GSSG concentration was not significantly different between study arm or visits
+* Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
+  * Among LA: difference between 3-month visit and baseline was `r beta1 %>% filter(term == "visitMonth3") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "visitMonth3") %>% pull(pvalue) %>% signif(2)`)
+  * Among LA: difference between 12-month visit and baseline was `r beta1 %>% filter(term == "visitMonth12") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "visitMonth12") %>% pull(pvalue) %>% signif(2)`)
+  * Among placebo: difference between 3-month visit and baseline was `r beta7 %>% filter(term == "visitMonth3") %>% pull(estimate) %>% signif(3)` (p-value = `r beta7 %>% filter(term == "visitMonth3") %>% pull(pvalue) %>% signif(2)`)
+  * Among placebo: difference between 12-month visit and baseline was `r beta7 %>% filter(term == "visitMonth12") %>% pull(estimate) %>% signif(3)` (p-value = `r beta7 %>% filter(term == "visitMonth12") %>% pull(pvalue) %>% signif(2)`)
+* Normalized GSH concentration was not significantly different between study arm or visits
+* Normalized GSSG concentration was not significantly different between study arm or visits

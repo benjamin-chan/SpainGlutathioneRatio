@@ -14,6 +14,24 @@ $$
 
 ## 24-month brain atrophy
 
+![figures/boxplotBrainAtrophy.png](figures/boxplotBrainAtrophy.png)
+
+```{r, fig.show = "hide"}
+G <-
+  df2 %>% 
+  ggplot(aes(x = studyArm, y = brainAtrophy, fill = studyArm)) +
+  geom_boxplot(alpha = 1/2) +
+  geom_jitter(width = 1/20) +
+  scale_x_discrete("") +
+  scale_y_continuous("% Brain atrophy") +
+  theme_bw() +
+  theme(legend.position = "none",
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.y = element_blank())
+ggsave("figures/boxplotBrainAtrophy.svg", width = 6, height = 4)
+ggsave("figures/boxplotBrainAtrophy.png", width = 6, height = 4)
+```
+
 ![figures/scatterplotMatrixBrainAtrophy.png](figures/scatterplotMatrixBrainAtrophy.png)
 
 ```{r scatterplotMatrixBrainAtrophy, fig.show = "hide"}
@@ -39,32 +57,34 @@ ggsave("figures/scatterplotMatrixBrainAtrophy.png", width = 6, height = 6)
 
 Linear model.
 
-```{r brainAtrophy}
-df2 <- 
-  df2 %>% 
-  mutate(invConcRatioM0 = 1 / concRatioM0)
+```{r}
 M <- lm(brainAtrophy ~ studyArm, data = df2)
 summary(M)
-M <- update(M, . ~ studyArm + pctChangeConcRatio)
-summary(M)
-M <- update(M, . ~ studyArm + pctChangeConcRatio + concRatioM0)
-summary(M)
-M <- update(M, . ~ studyArm + pctChangeConcRatio + invConcRatioM0)
-summary(M)
-M <- update(M, . ~ studyArm + concRatioM0)
-summary(M)
-M <- update(M, . ~ studyArm + invConcRatioM0)
-summary(M)
+tidy(M) %>% kable(digits = c(2, 2, 2, 2, 4))
 ```
 
-```{r brainAtrophyDiagnostics}
-tidy(M) %>% kable(digits = 2)
+Details (not shown).
+
+```{r brainAtrophyDiagnostics, results = "hide", fig.show = "hide"}
 res <- residuals(M)
 plot(res)
 qqnorm(res)
 plot(M)
-rm(M, res)
+```
+
+```{r}
+M1 <- update(M, . ~ studyArm + pctChangeConcRatio)
+summary(M1)
+M2 <- update(M, . ~ studyArm + concRatioM0)
+summary(M2)
 ```
 
 
 ## Interpretation
+
+* Percent brain atrophy was significantly different in the placebo group compared to the LA group
+  * Difference of `r M %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r M %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(p.value) %>% signif(3)`)
+* The difference persisted after adjusting for percent change in GSH:GSSG concentration ratio from baseline to 12-month visit
+  * Difference of `r M1 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r M1 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(p.value) %>% signif(3)`)
+* The difference was attenuated after adjusting for baseline GSH:GSSG concentration ratio
+  * Difference of `r M2 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r M2 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(p.value) %>% signif(3)`)

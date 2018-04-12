@@ -298,7 +298,29 @@ beta11 <- M %>% tableFixedEffects()
 * The differences in normalized concentration ratio from baseline were not significantly different between LA and placebo
   * Baseline to 3-months: `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth3") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth3") %>% pull(pvalue) %>% signif(2)`)
   * Baseline to 12-months: `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth12") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth12") %>% pull(pvalue) %>% signif(2)`)
-  
+
+![figures/predictedNormalizedConcRatio.png](figures/predictedNormalizedConcRatio.png)
+
+```{r predictedNormalizedConcRatio, fig.show = "hide"}
+M %>% 
+  get_model_data(type = "pred",
+             terms = c("visitMonth", "studyArm")) %>% 
+  select(group, x, predicted, conf.low, conf.high) %>% 
+  arrange(group, x) %>% 
+  kable()
+M %>% 
+  plot_model(type = "pred",
+             terms = c("visitMonth", "studyArm"),
+             title = "",
+             axis.title = c("Visit month", "Predicted normalizedconcentration\nGSH:GSSG ratio")) +
+  geom_line() +
+  geom_point(size = 2) +
+  theme_bw() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank())
+ggsave("figures/predictedNormalizedConcRatio.svg", width = 6, height = 4)
+ggsave("figures/predictedNormalizedConcRatio.png", width = 6, height = 4)
+```
 
 ### Normalized GSH concentration
 

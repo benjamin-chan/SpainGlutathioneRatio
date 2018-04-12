@@ -282,6 +282,8 @@ M <- lmer(normalizedConcGSH ~ studyArm * visitMonth + (1 | patientID),
 beta11 <- M %>% tableFixedEffects()
 ```
 
+### Normalized concentration ratio
+
 * Normalized concentration ratio was significantly different between placebo and LA
   * Difference between placebo and LA at baseline visit was `r beta1 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
   * Difference between placebo and LA at 3-month visit was `r beta5 %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r beta5 %>% filter(term == "studyArmPlacebo") %>% pull(pvalue) %>% signif(2)`)
@@ -293,5 +295,16 @@ beta11 <- M %>% tableFixedEffects()
   * Among LA: difference between 12-month visit and baseline was `r beta1 %>% filter(term == "visitMonth12") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "visitMonth12") %>% pull(pvalue) %>% signif(2)`)
   * Among placebo: difference between 3-month visit and baseline was `r beta7 %>% filter(term == "visitMonth3") %>% pull(estimate) %>% signif(3)` (p-value = `r beta7 %>% filter(term == "visitMonth3") %>% pull(pvalue) %>% signif(2)`)
   * Among placebo: difference between 12-month visit and baseline was `r beta7 %>% filter(term == "visitMonth12") %>% pull(estimate) %>% signif(3)` (p-value = `r beta7 %>% filter(term == "visitMonth12") %>% pull(pvalue) %>% signif(2)`)
+* The differences in normalized concentration ratio from baseline were not significantly different between LA and placebo
+  * Baseline to 3-months: `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth3") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth3") %>% pull(pvalue) %>% signif(2)`)
+  * Baseline to 12-months: `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth12") %>% pull(estimate) %>% signif(3)` (p-value = `r beta1 %>% filter(term == "studyArmPlacebo:visitMonth12") %>% pull(pvalue) %>% signif(2)`)
+  
+
+### Normalized GSH concentration
+
 * Normalized GSH concentration was not significantly different between study arm or visits
+
+
+### Normalized GSSG concentration
+
 * Normalized GSSG concentration was not significantly different between study arm or visits

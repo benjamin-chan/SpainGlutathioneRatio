@@ -2,13 +2,16 @@
 
 ```{r}
 df1 <-
-  "data/raw/Spain Manifest.xlsx" %>% 
-  read_excel(.) %>% 
+  "data/raw/4.11.18 Spain Manifest with baseline brain volume.xlsx" %>% 
+  read_excel(., n_max = 59) %>% 
   rename(sampleID = "Sample #",
          patientID = "Patient ID",
          visitMonth = "Visit month",
          studyArm = "Study Arm",
-         brainAtrophy = "M24 brain atrophy (% change)") %>% 
+         brainAtrophy = "M24 brain atrophy (% change)",
+         id2 = "Study ID",
+         wholeBrainVol = "FSL SienaX: Whole Brain Vol (mmm3) M0") %>% 
+  select(-id2) %>% 
   mutate(patientID = patientID %>% factor(),
          visitMonth = visitMonth %>% gsub("M", "", .) %>% as.integer() %>% factor(),
          studyArm = studyArm %>% factor())
@@ -149,7 +152,7 @@ Aim 1
 ```{r}
 df1 <- 
   df %>% 
-  select(-brainAtrophy)
+  select(-c(brainAtrophy, wholeBrainVol))
 str(df1)
 df1 %>% 
   arrange(studyArm, patientID) %>% 
@@ -167,8 +170,9 @@ df2 <-
   mutate(visitMonth = sprintf("concRatioM%s", as.character(visitMonth))) %>% 
   spread(visitMonth, normalizedConcRatio) %>% 
   mutate(pctChangeConcRatio = (concRatioM12 - concRatioM0) / concRatioM0 * 100) %>% 
-  inner_join(df %>% select(patientID, brainAtrophy) %>% filter(!is.na(brainAtrophy)),
-             by = "patientID")
+  inner_join(df %>% select(patientID, brainAtrophy, wholeBrainVol) %>% filter(!is.na(brainAtrophy)),
+             by = "patientID") %>% 
+  mutate(wholeBrainVolScaled = scale(wholeBrainVol))
 str(df2)
 df2 %>% arrange(studyArm, patientID) %>% kable(digits = 2)
 ```

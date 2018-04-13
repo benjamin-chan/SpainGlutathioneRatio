@@ -5,9 +5,9 @@ The model for Aim 2 will be a linear regression model.
 The model is
 
 $$
-y_{i} =
+y_{\text{% brain atrophy}, i} =
 \beta_0
-+ \beta_1 x_{\text{placebo}, i}
++ \beta_1 x_{\text{%}\Delta\text{GSH:GSSG}, i}
 + e_{i}
 $$
 
@@ -32,7 +32,23 @@ ggsave("figures/boxplotBrainAtrophy.svg", width = 6, height = 4)
 ggsave("figures/boxplotBrainAtrophy.png", width = 6, height = 4)
 ```
 
-![figures/scatterplotMatrixBrainAtrophy.png](figures/scatterplotMatrixBrainAtrophy.png)
+![figures/scatterplotBrainAtrophy.png](figures/scatterploBrainAtrophy.png)
+
+```{r scatterplotBrainAtrophy, fig.show = "hide"}
+G <- 
+  df2 %>% 
+  ggplot(aes(y = brainAtrophy, x = pctChangeConcRatio, color = studyArm)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ studyArm) +
+  scale_x_continuous("12-month % change GSH:GSSG ratio") +
+  scale_y_continuous("24-month % brain atrophy") +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid.minor = element_blank())
+ggsave("figures/scatterplotBrainAtrophy.svg", width = 6, height = 4)
+ggsave("figures/scatterplotBrainAtrophy.png", width = 6, height = 4)
+```
 
 ```{r scatterplotMatrixBrainAtrophy, fig.show = "hide"}
 setDens <- function (data, mapping, ...) {
@@ -50,7 +66,6 @@ G <-
           diag = list(continuous = setDens),
           lower = list(continuous = setPoints)) +
   theme_bw()
-G
 ggsave("figures/scatterplotMatrixBrainAtrophy.svg", width = 6, height = 6)
 ggsave("figures/scatterplotMatrixBrainAtrophy.png", width = 6, height = 6)
 ```
@@ -58,9 +73,13 @@ ggsave("figures/scatterplotMatrixBrainAtrophy.png", width = 6, height = 6)
 Linear model.
 
 ```{r}
-M <- lm(brainAtrophy ~ studyArm, data = df2)
+M <- lm(brainAtrophy ~ pctChangeConcRatio, data = df2)
 summary(M)
-tidy(M) %>% kable(digits = c(2, 2, 2, 2, 4))
+M1 <- update(M, ~ . + studyArm)
+summary(M1)
+M2 <- update(M1, ~ . + studyArm * pctChangeConcRatio)
+summary(M2)
+tidy(M2) %>% kable(digits = c(2, 2, 2, 2, 4))
 ```
 
 Details (not shown).
@@ -72,19 +91,35 @@ qqnorm(res)
 plot(M)
 ```
 
-```{r}
-M1 <- update(M, . ~ studyArm + pctChangeConcRatio)
-summary(M1)
-M2 <- update(M, . ~ studyArm + concRatioM0)
-summary(M2)
-```
 
 
 ## Interpretation
 
-* Percent brain atrophy was significantly different in the placebo group compared to the LA group
-  * Difference of `r M %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r M %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(p.value) %>% signif(3)`)
-* The difference persisted after adjusting for percent change in GSH:GSSG concentration ratio from baseline to 12-month visit
-  * Difference of `r M1 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r M1 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(p.value) %>% signif(3)`)
-* The difference was attenuated after adjusting for baseline GSH:GSSG concentration ratio
-  * Difference of `r M2 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(estimate) %>% signif(3)` (p-value = `r M2 %>% tidy() %>% filter(term == "studyArmPlacebo") %>% pull(p.value) %>% signif(3)`)
+```{r, results = "hide"}
+partcor <- 
+  df2 %>% 
+  dplyr::select(brainAtrophy, pctChangeConcRatio) %>% 
+  as.matrix() %>% 
+  pcor()
+r <- partcor %>% .$estimate %>% .[1, 2]
+rsq <- r^2 
+```
+
+* Percent brain atrophy was not significantly associated with GSH:GSSG concentration change
+  * $\hat{\beta}$ of `r M %>% tidy() %>% filter(term == "pctChangeConcRatio") %>% pull(estimate) %>% signif(3)` (p-value = `r M %>% tidy() %>% filter(term == "pctChangeConcRatio") %>% pull(p.value) %>% signif(3)`)
+  * Correlation coefficient = `r r %>% signif(3)`
+  * GSH:GSSG concentration change explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy
+```{r, results = "hide"}
+partcor <- 
+  df2 %>% 
+  select(brainAtrophy, pctChangeConcRatio, studyArm) %>%
+  mutate(studyArm = as.integer(unclass(studyArm))) %>% 
+  as.matrix() %>% 
+  pcor()
+r <- partcor %>% .$estimate %>% .[1, 2]
+rsq <- r^2 
+```
+* The association was still not significant after adjusting for study arm
+  * $\hat{\beta}$ of `r M1 %>% tidy() %>% filter(term == "pctChangeConcRatio") %>% pull(estimate) %>% signif(3)` (p-value = `r M1 %>% tidy() %>% filter(term == "pctChangeConcRatio") %>% pull(p.value) %>% signif(3)`)
+  * Partial correlation coefficient = `r r %>% signif(3)`
+  * GSH:GSSG concentration change explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy after adjusting for study arm

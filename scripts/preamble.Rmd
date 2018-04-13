@@ -5,6 +5,7 @@ opts_knit$get("root.dir")
 ```
 
 ```{r, echo = FALSE, include = FALSE}
+library(MASS)
 library(magrittr)
 library(tidyverse)
 library(readxl)

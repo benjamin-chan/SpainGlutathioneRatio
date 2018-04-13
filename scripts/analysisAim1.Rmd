@@ -81,6 +81,27 @@ beta1 <- M %>% tableFixedEffects()
 beta1 %>% kable(digits = c(0, 2, 2, 2, 0, 4))
 ```
 
+```{r predictedNormalizedConcRatio, fig.show = "hide"}
+M %>% 
+  get_model_data(type = "pred",
+             terms = c("visitMonth", "studyArm")) %>% 
+  select(group, x, predicted, conf.low, conf.high) %>% 
+  arrange(group, x) %>% 
+  kable()
+M %>% 
+  plot_model(type = "pred",
+             terms = c("visitMonth", "studyArm"),
+             title = "",
+             axis.title = c("Visit month", "Predicted normalizedconcentration\nGSH:GSSG ratio")) +
+  geom_line() +
+  geom_point(size = 2) +
+  theme_bw() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank())
+ggsave("figures/predictedNormalizedConcRatio.svg", width = 6, height = 4)
+ggsave("figures/predictedNormalizedConcRatio.png", width = 6, height = 4)
+```
+
 Details (not shown).
 
 ```{r normalizedConcRatio-lme4, results = "hide", fig.show = "hide"}
@@ -301,26 +322,6 @@ beta11 <- M %>% tableFixedEffects()
 
 ![figures/predictedNormalizedConcRatio.png](figures/predictedNormalizedConcRatio.png)
 
-```{r predictedNormalizedConcRatio, fig.show = "hide"}
-M %>% 
-  get_model_data(type = "pred",
-             terms = c("visitMonth", "studyArm")) %>% 
-  select(group, x, predicted, conf.low, conf.high) %>% 
-  arrange(group, x) %>% 
-  kable()
-M %>% 
-  plot_model(type = "pred",
-             terms = c("visitMonth", "studyArm"),
-             title = "",
-             axis.title = c("Visit month", "Predicted normalizedconcentration\nGSH:GSSG ratio")) +
-  geom_line() +
-  geom_point(size = 2) +
-  theme_bw() +
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor = element_blank())
-ggsave("figures/predictedNormalizedConcRatio.svg", width = 6, height = 4)
-ggsave("figures/predictedNormalizedConcRatio.png", width = 6, height = 4)
-```
 
 ### Normalized GSH concentration
 

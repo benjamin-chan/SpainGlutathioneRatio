@@ -123,3 +123,64 @@ rsq <- r^2
   * $\hat{\beta}$ of `r M1 %>% tidy() %>% filter(term == "pctChangeConcRatio") %>% pull(estimate) %>% signif(3)` (p-value = `r M1 %>% tidy() %>% filter(term == "pctChangeConcRatio") %>% pull(p.value) %>% signif(3)`)
   * Partial correlation coefficient = `r r %>% signif(3)`
   * GSH:GSSG concentration change explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy after adjusting for study arm
+
+
+## Crosssectional correlation between baseline GSH:GSSG ratio and brain volume
+
+![figures/scatterplotBrainVolumeAtBaseline.png](figures/scatterplotBrainVolumeAtBaseline.png)
+
+```{r scatterplotBrainVolumeAtBaseline, fig.show = "hide"}
+G <-
+  df2 %>% 
+  ggplot(aes(y = wholeBrainVol, x = concRatioM0, color = studyArm)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ studyArm) +
+  scale_x_continuous("Baseline GSH:GSSG ratio") +
+  scale_y_continuous("Baseline brain volume (mm^3)") +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid.minor = element_blank())
+ggsave("figures/scatterplotBrainVolumeAtBaseline.svg", width = 6, height = 4)
+ggsave("figures/scatterplotBrainVolumeAtBaseline.png", width = 6, height = 4)
+```
+
+Linear model.
+
+```{r}
+M <- lm(wholeBrainVol ~ concRatioM0, data = df2)
+summary(M)
+M1 <- update(M, ~ . + studyArm)
+summary(M1)
+```
+
+### Interpretation
+
+```{r, results = "hide"}
+partcor <- 
+  df2 %>% 
+  dplyr::select(wholeBrainVol, concRatioM0) %>% 
+  as.matrix() %>% 
+  pcor()
+r <- partcor %>% .$estimate %>% .[1, 2]
+rsq <- r^2 
+```
+
+* Baseline whole brain volume was not significantly associated with baseline GSH:GSSG concentration ratio
+  * $\hat{\beta}$ of `r M %>% tidy() %>% filter(term == "concRatioM0") %>% pull(estimate) %>% signif(3)` (p-value = `r M %>% tidy() %>% filter(term == "concRatioM0") %>% pull(p.value) %>% signif(3)`)
+  * Correlation coefficient = `r r %>% signif(3)`
+  * Baseline GSH:GSSG concentration ratio explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy
+```{r, results = "hide"}
+partcor <- 
+  df2 %>% 
+  select(wholeBrainVol, concRatioM0, studyArm) %>%
+  mutate(studyArm = as.integer(unclass(studyArm))) %>% 
+  as.matrix() %>% 
+  pcor()
+r <- partcor %>% .$estimate %>% .[1, 2]
+rsq <- r^2 
+```
+* The association was still not significant after adjusting for study arm
+  * $\hat{\beta}$ of `r M1 %>% tidy() %>% filter(term == "concRatioM0") %>% pull(estimate) %>% signif(3)` (p-value = `r M1 %>% tidy() %>% filter(term == "concRatioM0") %>% pull(p.value) %>% signif(3)`)
+  * Partial correlation coefficient = `r r %>% signif(3)`
+  * Baseline GSH:GSSG concentration ratio explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy after adjusting for study arm

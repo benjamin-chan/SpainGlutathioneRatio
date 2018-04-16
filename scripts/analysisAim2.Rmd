@@ -32,7 +32,7 @@ ggsave("figures/boxplotBrainAtrophy.svg", width = 6, height = 4)
 ggsave("figures/boxplotBrainAtrophy.png", width = 6, height = 4)
 ```
 
-![figures/scatterplotBrainAtrophy.png](figures/scatterploBrainAtrophy.png)
+![figures/scatterplotBrainAtrophy.png](figures/scatterplotBrainAtrophy.png)
 
 ```{r scatterplotBrainAtrophy, fig.show = "hide"}
 G <- 

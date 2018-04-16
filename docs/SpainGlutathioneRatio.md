@@ -1,6 +1,6 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-04-12"
+date: "2018-04-16"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
@@ -412,7 +412,7 @@ $$
 
 
 
-![figures/scatterplotBrainAtrophy.png](figures/scatterploBrainAtrophy.png)
+![figures/scatterplotBrainAtrophy.png](figures/scatterplotBrainAtrophy.png)
 
 
 
@@ -516,6 +516,73 @@ Details (not shown).
   * $\hat{\beta}$ of -0.002 (p-value = 0.894)
   * Partial correlation coefficient = -0.0327
   * GSH:GSSG concentration change explains 0.107% of the variation in brain atrophy after adjusting for study arm
+
+
+## Crosssectional correlation between baseline GSH:GSSG ratio and brain volume
+
+![figures/scatterplotBrainVolumeAtBaseline.png](figures/scatterplotBrainVolumeAtBaseline.png)
+
+
+
+Linear model.
+
+
+```
+## 
+## Call:
+## lm(formula = wholeBrainVol ~ concRatioM0, data = df2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -78569 -37987 -19742  20919 165697 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 1343187.3   123322.1  10.892 2.36e-09 ***
+## concRatioM0     595.0      851.3   0.699    0.494    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 61870 on 18 degrees of freedom
+## Multiple R-squared:  0.02642,	Adjusted R-squared:  -0.02767 
+## F-statistic: 0.4884 on 1 and 18 DF,  p-value: 0.4936
+```
+
+```
+## 
+## Call:
+## lm(formula = wholeBrainVol ~ concRatioM0 + studyArm, data = df2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -74629 -33266 -14741  18701 168892 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      1469063     169843   8.650 1.24e-07 ***
+## concRatioM0         -134       1086  -0.123    0.903    
+## studyArmPlacebo   -38074      35487  -1.073    0.298    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 61610 on 17 degrees of freedom
+## Multiple R-squared:  0.08816,	Adjusted R-squared:  -0.01911 
+## F-statistic: 0.8218 on 2 and 17 DF,  p-value: 0.4564
+```
+
+### Interpretation
+
+
+
+* Baseline whole brain volume was not significantly associated with baseline GSH:GSSG concentration ratio
+  * $\hat{\beta}$ of 595 (p-value = 0.494)
+  * Correlation coefficient = 0.163
+  * Baseline GSH:GSSG concentration ratio explains 2.64% of the variation in brain atrophy
+
+* The association was still not significant after adjusting for study arm
+  * $\hat{\beta}$ of -134 (p-value = 0.903)
+  * Partial correlation coefficient = -0.0299
+  * Baseline GSH:GSSG concentration ratio explains 0.0894% of the variation in brain atrophy after adjusting for study arm
 
 
 

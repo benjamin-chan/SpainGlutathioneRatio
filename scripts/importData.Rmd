@@ -125,10 +125,29 @@ Recode data per Cassidy's email
 > Sample 45 = 143 M3  
 > Sample 46 = 143 M12  
 
+> From: Carin Waslo 
+> Sent: Wednesday, June 13, 2018 10:27 AM
+> To: Benjamin Chan <chanb@ohsu.edu>
+> Cc: Rebecca Spain <spainr@ohsu.edu>; Cassidy Taylor <taylocas@ohsu.edu>
+> Subject: SECURE: Spain - Glutathione ratios as the mechanism of action of LA in PMS
+> 
+> Good morning,
+> 
+> I work for Dr. Rebecca Spain and have been given the opportunity to develop a
+> poster for the Glutathione ratios as the mechanism of action of lipoic acid in
+> PMS study. While looking through the results, I noted an error in study arm
+> assignment for PatientID #123. PatientID #123 is listed as having received
+> Placebo, but actually had received LA. 
+> 
+> Could you please assign PatientID #123 to the LA study arm and rerun the
+> analysis? This should make each study arm contain 10 subjects. I am sorry for
+> any inconvenience. 
+
 ```{r}
 df[df$sampleID == 44, "visitMonth"] <- 0
 df[df$sampleID == 46, "patientID"] <- 143
 df[df$sampleID == 46, "studyArm"] <- "Placebo"
+df[df$patientID == 123, "studyArm"] <- "LA"
 ```
 
 Data check **after cleaning**.

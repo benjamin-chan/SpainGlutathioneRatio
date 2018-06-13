@@ -125,11 +125,11 @@ Recode data per Cassidy's email
 > Sample 45 = 143 M3  
 > Sample 46 = 143 M12  
 
-> From: Carin Waslo 
-> Sent: Wednesday, June 13, 2018 10:27 AM
-> To: Benjamin Chan <chanb@ohsu.edu>
-> Cc: Rebecca Spain <spainr@ohsu.edu>; Cassidy Taylor <taylocas@ohsu.edu>
-> Subject: SECURE: Spain - Glutathione ratios as the mechanism of action of LA in PMS
+> From: Carin Waslo   
+> Sent: Wednesday, June 13, 2018 10:27 AM  
+> To: Benjamin Chan <chanb@ohsu.edu>  
+> Cc: Rebecca Spain <spainr@ohsu.edu>; Cassidy Taylor <taylocas@ohsu.edu>  
+> Subject: SECURE: Spain - Glutathione ratios as the mechanism of action of LA in PMS  
 > 
 > Good morning,
 > 

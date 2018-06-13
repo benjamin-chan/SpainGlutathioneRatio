@@ -1,6 +1,6 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-04-16"
+date: "2018-06-13"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
@@ -60,6 +60,24 @@ Recode data per Cassidy's email
 > Sample 45 = 143 M3  
 > Sample 46 = 143 M12  
 
+> From: Carin Waslo   
+> Sent: Wednesday, June 13, 2018 10:27 AM  
+> To: Benjamin Chan <chanb@ohsu.edu>  
+> Cc: Rebecca Spain <spainr@ohsu.edu>; Cassidy Taylor <taylocas@ohsu.edu>  
+> Subject: SECURE: Spain - Glutathione ratios as the mechanism of action of LA in PMS  
+> 
+> Good morning,
+> 
+> I work for Dr. Rebecca Spain and have been given the opportunity to develop a
+> poster for the Glutathione ratios as the mechanism of action of lipoic acid in
+> PMS study. While looking through the results, I noted an error in study arm
+> assignment for PatientID #123. PatientID #123 is listed as having received
+> Placebo, but actually had received LA. 
+> 
+> Could you please assign PatientID #123 to the LA study arm and rerun the
+> analysis? This should make each study arm contain 10 subjects. I am sorry for
+> any inconvenience. 
+
 
 
 Data check **after cleaning**.
@@ -97,6 +115,9 @@ Aim 1
 |    118    |     0      |LA       |      125.06       |        0.93        |       134.39        |
 |    118    |     3      |LA       |      100.76       |        0.64        |       157.79        |
 |    118    |     12     |LA       |      137.35       |        0.83        |       165.82        |
+|    123    |     0      |LA       |       96.34       |        0.63        |       152.45        |
+|    123    |     3      |LA       |      131.28       |        1.00        |       131.92        |
+|    123    |     12     |LA       |      110.30       |        0.86        |       128.95        |
 |    124    |     0      |LA       |      127.61       |        0.76        |       168.90        |
 |    124    |     3      |LA       |       86.82       |        0.51        |       169.44        |
 |    124    |     12     |LA       |      109.10       |        0.64        |       171.58        |
@@ -128,9 +149,6 @@ Aim 1
 |    120    |     12     |Placebo  |      144.20       |        1.00        |       143.82        |
 |    122    |     0      |Placebo  |      124.43       |        0.97        |       127.89        |
 |    122    |     12     |Placebo  |      126.22       |        0.94        |       134.53        |
-|    123    |     0      |Placebo  |       96.34       |        0.63        |       152.45        |
-|    123    |     3      |Placebo  |      131.28       |        1.00        |       131.92        |
-|    123    |     12     |Placebo  |      110.30       |        0.86        |       128.95        |
 |    125    |     0      |Placebo  |       93.27       |        0.74        |       126.19        |
 |    125    |     3      |Placebo  |       91.82       |        0.64        |       143.24        |
 |    125    |     12     |Placebo  |      116.12       |        0.90        |       128.79        |
@@ -159,7 +177,7 @@ Aim 2
 ```
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	20 obs. of  8 variables:
 ##  $ patientID          : Factor w/ 20 levels "118","119","120",..: 1 2 3 4 5 6 7 8 9 10 ...
-##  $ studyArm           : Factor w/ 2 levels "LA","Placebo": 1 2 2 2 2 1 2 1 1 2 ...
+##  $ studyArm           : Factor w/ 2 levels "LA","Placebo": 1 2 2 2 1 1 2 1 1 2 ...
 ##  $ concRatioM0        : num  134 126 135 128 152 ...
 ##  $ concRatioM12       : num  166 131 144 135 129 ...
 ##  $ pctChangeConcRatio : num  23.39 4.4 6.78 5.2 -15.41 ...
@@ -175,6 +193,7 @@ Aim 2
 |patientID |studyArm | concRatioM0| concRatioM12| pctChangeConcRatio| brainAtrophy| wholeBrainVol| wholeBrainVolScaled|
 |:---------|:--------|-----------:|------------:|------------------:|------------:|-------------:|-------------------:|
 |118       |LA       |      134.39|       165.82|              23.39|         0.36|       1389025|         -0.65225435|
+|123       |LA       |      152.45|       128.95|             -15.41|        -0.68|       1413702|         -0.24790021|
 |124       |LA       |      168.90|       171.58|               1.59|         0.80|       1403817|         -0.40987661|
 |129       |LA       |      171.36|       175.25|               2.27|        -1.46|       1394722|         -0.55890808|
 |130       |LA       |      148.02|       176.26|              19.08|         0.20|       1465597|          0.60244636|
@@ -186,7 +205,6 @@ Aim 2
 |119       |Placebo  |      125.56|       131.09|               4.40|        -2.03|       1437526|          0.14247847|
 |120       |Placebo  |      134.69|       143.82|               6.78|        -1.54|       1385963|         -0.70243336|
 |122       |Placebo  |      127.89|       134.53|               5.20|         0.53|       1393046|         -0.58637150|
-|123       |Placebo  |      152.45|       128.95|             -15.41|        -0.68|       1413702|         -0.24790021|
 |125       |Placebo  |      126.19|       128.79|               2.06|        -1.12|       1398976|         -0.48919566|
 |131       |Placebo  |      124.82|       125.19|               0.29|        -1.75|       1583152|          2.52871095|
 |135       |Placebo  |      155.24|       148.21|              -4.52|        -0.27|       1460338|          0.51628125|
@@ -256,12 +274,12 @@ Mixed effects model using the **lme4** package.
 
 |term                         | estimate| std.error| statistic| df| pvalue|
 |:----------------------------|--------:|---------:|---------:|--:|------:|
-|(Intercept)                  |   155.18|      4.26|     36.42| 34| 0.0000|
-|studyArmPlacebo              |   -20.43|      5.74|     -3.56| 18| 0.0023|
-|visitMonth3                  |     2.29|      5.94|      0.38| 34| 0.7027|
-|visitMonth12                 |    12.04|      5.94|      2.03| 34| 0.0505|
-|studyArmPlacebo:visitMonth3  |    -3.05|      8.21|     -0.37| 34| 0.7121|
-|studyArmPlacebo:visitMonth12 |    -9.43|      8.01|     -1.18| 34| 0.2469|
+|(Intercept)                  |   154.90|      4.38|     35.38| 34| 0.0000|
+|studyArmPlacebo              |   -21.92|      6.19|     -3.54| 18| 0.0023|
+|visitMonth3                  |     0.00|      5.73|      0.00| 34| 0.9995|
+|visitMonth12                 |     8.48|      5.73|      1.48| 34| 0.1478|
+|studyArmPlacebo:visitMonth3  |     1.24|      8.38|      0.15| 34| 0.8830|
+|studyArmPlacebo:visitMonth12 |    -3.27|      8.10|     -0.40| 34| 0.6891|
 
 
 ```
@@ -272,12 +290,12 @@ Mixed effects model using the **lme4** package.
 
 |group   |  x| predicted| conf.low| conf.high|
 |:-------|--:|---------:|--------:|---------:|
-|LA      |  0|  155.1758| 146.8258|  163.5257|
-|LA      |  3|  157.4609| 149.1109|  165.8108|
-|LA      | 12|  167.2139| 158.8640|  175.5639|
-|Placebo |  0|  134.7490| 126.3991|  143.0989|
-|Placebo |  3|  133.9797| 125.6297|  142.3296|
-|Placebo | 12|  137.3535| 129.0036|  145.7035|
+|LA      |  0|  154.9033| 146.3226|  163.4839|
+|LA      |  3|  154.9072| 146.3266|  163.4879|
+|LA      | 12|  163.3880| 154.8073|  171.9686|
+|Placebo |  0|  132.9788| 124.3982|  141.5595|
+|Placebo |  3|  134.2257| 125.6450|  142.8063|
+|Placebo | 12|  138.1935| 129.6128|  146.7741|
 
 ```
 ## Note: uncertainty of the random effects parameters are not taken into account for confidence intervals.
@@ -306,12 +324,12 @@ Mixed effects model using the **lme4** package.
 
 |term                         | estimate| std.error| statistic| df| pvalue|
 |:----------------------------|--------:|---------:|---------:|--:|------:|
-|(Intercept)                  |   129.52|      9.15|     14.15| 34| 0.0000|
-|studyArmPlacebo              |    -9.39|     12.34|     -0.76| 18| 0.4565|
-|visitMonth3                  |    -9.74|     10.99|     -0.89| 34| 0.3818|
-|visitMonth12                 |     9.21|     10.99|      0.84| 34| 0.4078|
-|studyArmPlacebo:visitMonth3  |    20.22|     15.27|      1.32| 34| 0.1942|
-|studyArmPlacebo:visitMonth12 |    -1.43|     14.82|     -0.10| 34| 0.9235|
+|(Intercept)                  |   126.20|      8.78|     14.38| 34| 0.0000|
+|studyArmPlacebo              |    -3.69|     12.41|     -0.30| 18| 0.7694|
+|visitMonth3                  |    -5.27|     10.63|     -0.50| 34| 0.6230|
+|visitMonth12                 |     9.69|     10.63|      0.91| 34| 0.3685|
+|studyArmPlacebo:visitMonth3  |    13.07|     15.59|      0.84| 34| 0.4077|
+|studyArmPlacebo:visitMonth12 |    -2.52|     15.03|     -0.17| 34| 0.8676|
 
 Details (not shown).
 
@@ -336,12 +354,12 @@ Mixed effects model using the **lme4** package.
 
 |term                         | estimate| std.error| statistic| df| pvalue|
 |:----------------------------|--------:|---------:|---------:|--:|------:|
-|(Intercept)                  |     0.84|      0.07|     12.07| 34| 0.0000|
-|studyArmPlacebo              |     0.06|      0.09|      0.64| 18| 0.5288|
-|visitMonth3                  |    -0.07|      0.09|     -0.85| 34| 0.4033|
-|visitMonth12                 |    -0.01|      0.09|     -0.11| 34| 0.9137|
-|studyArmPlacebo:visitMonth3  |     0.15|      0.12|      1.24| 34| 0.2232|
-|studyArmPlacebo:visitMonth12 |     0.05|      0.12|      0.40| 34| 0.6915|
+|(Intercept)                  |     0.82|      0.07|     12.41| 34| 0.0000|
+|studyArmPlacebo              |     0.11|      0.09|      1.16| 18| 0.2621|
+|visitMonth3                  |    -0.03|      0.08|     -0.36| 34| 0.7196|
+|visitMonth12                 |     0.01|      0.08|      0.16| 34| 0.8726|
+|studyArmPlacebo:visitMonth3  |     0.08|      0.12|      0.62| 34| 0.5383|
+|studyArmPlacebo:visitMonth12 |     0.01|      0.12|      0.05| 34| 0.9629|
 
 Details (not shown).
 
@@ -364,19 +382,19 @@ The `lme4::lmer()` function is good enough.
 ### Normalized concentration ratio
 
 * Normalized concentration ratio was significantly different between placebo and LA
-  * Difference between placebo and LA at baseline visit was -20.4 (p-value = 0.0023)
-  * Difference between placebo and LA at 3-month visit was -23.5 (p-value = 0.0011)
-  * Difference between placebo and LA at 12-month visit was -29.9 (p-value = 6.1 &times; 10<sup>-5</sup>)
+  * Difference between placebo and LA at baseline visit was -21.9 (p-value = 0.0023)
+  * Difference between placebo and LA at 3-month visit was -20.7 (p-value = 0.0055)
+  * Difference between placebo and LA at 12-month visit was -25.2 (p-value = 7.2 &times; 10<sup>-4</sup>)
   * Difference between placebo and LA at baseline visit was not significantly different compared to month 3 or month 12 visits (i.e., difference between placebo and LA was significant at **all visits**)
-  * Global difference between placebo and LA was -24.5 (p-value = 1.3 &times; 10<sup>-6</sup>)
+  * Global difference between placebo and LA was -22.5 (p-value = 3.3 &times; 10<sup>-5</sup>)
 * Normalized concentration ratio was not significantly different between visits, either within the placebo group or LA group
-  * Among LA: difference between 3-month visit and baseline was 2.29 (p-value = 0.7)
-  * Among LA: difference between 12-month visit and baseline was 12 (p-value = 0.051)
-  * Among placebo: difference between 3-month visit and baseline was -0.769 (p-value = 0.89)
-  * Among placebo: difference between 12-month visit and baseline was 2.6 (p-value = 0.63)
+  * Among LA: difference between 3-month visit and baseline was 0.00397 (p-value = 1)
+  * Among LA: difference between 12-month visit and baseline was 8.48 (p-value = 0.15)
+  * Among placebo: difference between 3-month visit and baseline was 1.25 (p-value = 0.84)
+  * Among placebo: difference between 12-month visit and baseline was 5.21 (p-value = 0.37)
 * The differences in normalized concentration ratio from baseline were not significantly different between LA and placebo
-  * Baseline to 3-months: -3.05 (p-value = 0.71)
-  * Baseline to 12-months: -9.43 (p-value = 0.25)
+  * Baseline to 3-months: 1.24 (p-value = 0.88)
+  * Baseline to 12-months: -3.27 (p-value = 0.69)
 
 ![figures/predictedNormalizedConcRatio.png](figures/predictedNormalizedConcRatio.png)
 
@@ -449,19 +467,19 @@ Linear model.
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.28391 -0.73332  0.04088  0.57735  1.81193 
+## -1.30784 -0.69327 -0.02638  0.48161  1.86379 
 ## 
 ## Coefficients:
 ##                     Estimate Std. Error t value Pr(>|t|)  
-## (Intercept)        -0.232099   0.324069  -0.716   0.4836  
-## pctChangeConcRatio -0.001996   0.014784  -0.135   0.8942  
-## studyArmPlacebo    -1.035179   0.410478  -2.522   0.0219 *
+## (Intercept)        -0.315742   0.293528  -1.076   0.2971  
+## pctChangeConcRatio  0.003663   0.014321   0.256   0.8012  
+## studyArmPlacebo    -1.032810   0.395621  -2.611   0.0183 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.8913 on 17 degrees of freedom
-## Multiple R-squared:  0.2779,	Adjusted R-squared:  0.1929 
-## F-statistic:  3.27 on 2 and 17 DF,  p-value: 0.06285
+## Residual standard error: 0.8827 on 17 degrees of freedom
+## Multiple R-squared:  0.2917,	Adjusted R-squared:  0.2083 
+## F-statistic:   3.5 on 2 and 17 DF,  p-value: 0.05334
 ```
 
 ```
@@ -471,31 +489,31 @@ Linear model.
 ##     data = df2)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.5167 -0.5468  0.1300  0.3598  1.8464 
+##      Min       1Q   Median       3Q      Max 
+## -1.51347 -0.50883  0.03996  0.34823  1.87493 
 ## 
 ## Coefficients:
 ##                                    Estimate Std. Error t value Pr(>|t|)  
-## (Intercept)                        -0.43090    0.35922  -1.200   0.2478  
-## pctChangeConcRatio                  0.02071    0.02372   0.873   0.3957  
-## studyArmPlacebo                    -0.79917    0.44921  -1.779   0.0942 .
-## pctChangeConcRatio:studyArmPlacebo -0.03649    0.03008  -1.213   0.2427  
+## (Intercept)                        -0.41864    0.30452  -1.375   0.1882  
+## pctChangeConcRatio                  0.01989    0.02008   0.991   0.3365  
+## studyArmPlacebo                    -0.85676    0.42126  -2.034   0.0589 .
+## pctChangeConcRatio:studyArmPlacebo -0.03245    0.02839  -1.143   0.2698  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.8791 on 16 degrees of freedom
-## Multiple R-squared:  0.3387,	Adjusted R-squared:  0.2147 
-## F-statistic: 2.731 on 3 and 16 DF,  p-value: 0.07818
+## Residual standard error: 0.8748 on 16 degrees of freedom
+## Multiple R-squared:  0.3451,	Adjusted R-squared:  0.2224 
+## F-statistic: 2.811 on 3 and 16 DF,  p-value: 0.07279
 ```
 
 
 
 |term                               | estimate| std.error| statistic| p.value|
 |:----------------------------------|--------:|---------:|---------:|-------:|
-|(Intercept)                        |    -0.43|      0.36|     -1.20|  0.2478|
-|pctChangeConcRatio                 |     0.02|      0.02|      0.87|  0.3957|
-|studyArmPlacebo                    |    -0.80|      0.45|     -1.78|  0.0942|
-|pctChangeConcRatio:studyArmPlacebo |    -0.04|      0.03|     -1.21|  0.2427|
+|(Intercept)                        |    -0.42|      0.30|     -1.37|  0.1882|
+|pctChangeConcRatio                 |     0.02|      0.02|      0.99|  0.3365|
+|studyArmPlacebo                    |    -0.86|      0.42|     -2.03|  0.0589|
+|pctChangeConcRatio:studyArmPlacebo |    -0.03|      0.03|     -1.14|  0.2698|
 
 Details (not shown).
 
@@ -513,9 +531,9 @@ Details (not shown).
   * GSH:GSSG concentration change explains 0.769% of the variation in brain atrophy
 
 * The association was still not significant after adjusting for study arm
-  * $\hat{\beta}$ of -0.002 (p-value = 0.894)
-  * Partial correlation coefficient = -0.0327
-  * GSH:GSSG concentration change explains 0.107% of the variation in brain atrophy after adjusting for study arm
+  * $\hat{\beta}$ of 0.00366 (p-value = 0.801)
+  * Partial correlation coefficient = 0.0619
+  * GSH:GSSG concentration change explains 0.383% of the variation in brain atrophy after adjusting for study arm
 
 
 ## Crosssectional correlation between baseline GSH:GSSG ratio and brain volume
@@ -555,19 +573,19 @@ Linear model.
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -74629 -33266 -14741  18701 168892 
+## -74254 -33370 -16480  21317 169276 
 ## 
 ## Coefficients:
-##                 Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)      1469063     169843   8.650 1.24e-07 ***
-## concRatioM0         -134       1086  -0.123    0.903    
-## studyArmPlacebo   -38074      35487  -1.073    0.298    
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     1464256.0   180476.2   8.113 3.01e-07 ***
+## concRatioM0        -125.5     1158.2  -0.108    0.915    
+## studyArmPlacebo  -34709.5    37638.6  -0.922    0.369    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 61610 on 17 degrees of freedom
-## Multiple R-squared:  0.08816,	Adjusted R-squared:  -0.01911 
-## F-statistic: 0.8218 on 2 and 17 DF,  p-value: 0.4564
+## Residual standard error: 62120 on 17 degrees of freedom
+## Multiple R-squared:  0.0728,	Adjusted R-squared:  -0.03628 
+## F-statistic: 0.6674 on 2 and 17 DF,  p-value: 0.526
 ```
 
 ### Interpretation
@@ -580,9 +598,9 @@ Linear model.
   * Baseline GSH:GSSG concentration ratio explains 2.64% of the variation in brain atrophy
 
 * The association was still not significant after adjusting for study arm
-  * $\hat{\beta}$ of -134 (p-value = 0.903)
-  * Partial correlation coefficient = -0.0299
-  * Baseline GSH:GSSG concentration ratio explains 0.0894% of the variation in brain atrophy after adjusting for study arm
+  * $\hat{\beta}$ of -126 (p-value = 0.915)
+  * Partial correlation coefficient = -0.0263
+  * Baseline GSH:GSSG concentration ratio explains 0.0691% of the variation in brain atrophy after adjusting for study arm
 
 
 

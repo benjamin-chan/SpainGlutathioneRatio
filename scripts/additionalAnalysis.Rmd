@@ -1,0 +1,85 @@
+# Additional analysis
+
+> From: Carin Waslo   
+> Sent: Wednesday, August 08, 2018 3:27 PM  
+> To: Benjamin Chan <chanb@ohsu.edu>  
+> Subject: Spain - Glutathione ratios as the mechanism of action of LA in PMS  
+> 
+> Good afternoon,
+> 
+> Dr. Spain and I are developing a poster and abstract, for the Glutathione study,
+> to submit the ACRIMS 2019. Would you be willing to 1) review the attached
+> abstract and poster to ensure correct interpretation of the results you
+> provided, and 2) run one last analysis to see if baseline GSH:GSSG ratios
+> "predict" subsequent (at month 24) % change brain volumes for LA and placebo
+> groups?
+> 
+> Please let me know if you have any questions or need more information. And thank
+> you very much!
+> 
+> Best,
+> Carin
+
+The model closely follows the model used for Aim 2.
+
+The model is
+
+$$
+y_{\text{% brain atrophy}, i} =
+\beta_0
++ \beta_1 x_{\text{Baseline GSH:GSSG}, i}
++ e_{i}
+$$
+
+Linear model.
+
+```{r}
+M <- lm(brainAtrophy ~ concRatioM0, data = df2)
+summary(M)
+M1 <- update(M, ~ . + studyArm)
+summary(M1)
+M2 <- update(M1, ~ . + studyArm * concRatioM0)
+summary(M2)
+tidy(M2) %>% kable(digits = c(2, 2, 2, 2, 4))
+```
+
+Details (not shown).
+
+```{r additionalAnalysisDiagnostics, results = "hide", fig.show = "hide"}
+res <- residuals(M)
+plot(res)
+qqnorm(res)
+plot(M)
+```
+
+
+## Interpretation
+
+```{r, results = "hide"}
+partcor <- 
+  df2 %>% 
+  dplyr::select(brainAtrophy, concRatioM0) %>% 
+  as.matrix() %>% 
+  pcor()
+r <- partcor %>% .$estimate %>% .[1, 2]
+rsq <- r^2 
+```
+
+* Percent brain atrophy was not significantly associated with baseline GSH:GSSG concentration
+  * $\hat{\beta}$ of `r M %>% tidy() %>% filter(term == "concRatioM0") %>% pull(estimate) %>% signif(3)` (p-value = `r M %>% tidy() %>% filter(term == "concRatioM0") %>% pull(p.value) %>% signif(3)`)
+  * Correlation coefficient = `r r %>% signif(3)`
+  * Baseline GSH:GSSG concentration explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy
+```{r, results = "hide"}
+partcor <- 
+  df2 %>% 
+  select(brainAtrophy, concRatioM0, studyArm) %>%
+  mutate(studyArm = as.integer(unclass(studyArm))) %>% 
+  as.matrix() %>% 
+  pcor()
+r <- partcor %>% .$estimate %>% .[1, 2]
+rsq <- r^2 
+```
+* The association was still not significant after adjusting for study arm
+  * $\hat{\beta}$ of `r M1 %>% tidy() %>% filter(term == "concRatioM0") %>% pull(estimate) %>% signif(3)` (p-value = `r M1 %>% tidy() %>% filter(term == "concRatioM0") %>% pull(p.value) %>% signif(3)`)
+  * Partial correlation coefficient = `r r %>% signif(3)`
+  * Baseline GSH:GSSG concentration explains `r sprintf("%.3g%%", rsq * 100)` of the variation in brain atrophy after adjusting for study arm

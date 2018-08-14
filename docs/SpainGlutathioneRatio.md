@@ -1,6 +1,6 @@
 ---
 title: "Glutathione ratios as the mechanism of action of lipoic acid in progressive multiple sclerosis (PI: Rebecca Spain)"
-date: "2018-06-13"
+date: "2018-08-14"
 author: Benjamin Chan (chanb@ohsu.edu)
 output:
   html_document:
@@ -601,6 +601,137 @@ Linear model.
   * $\hat{\beta}$ of -126 (p-value = 0.915)
   * Partial correlation coefficient = -0.0263
   * Baseline GSH:GSSG concentration ratio explains 0.0691% of the variation in brain atrophy after adjusting for study arm
+
+
+
+# Additional analysis
+
+> From: Carin Waslo   
+> Sent: Wednesday, August 08, 2018 3:27 PM  
+> To: Benjamin Chan <chanb@ohsu.edu>  
+> Subject: Spain - Glutathione ratios as the mechanism of action of LA in PMS  
+> 
+> Good afternoon,
+> 
+> Dr. Spain and I are developing a poster and abstract, for the Glutathione study,
+> to submit the ACRIMS 2019. Would you be willing to 1) review the attached
+> abstract and poster to ensure correct interpretation of the results you
+> provided, and 2) run one last analysis to see if baseline GSH:GSSG ratios
+> "predict" subsequent (at month 24) % change brain volumes for LA and placebo
+> groups?
+> 
+> Please let me know if you have any questions or need more information. And thank
+> you very much!
+> 
+> Best,
+> Carin
+
+The model closely follows the model used for Aim 2.
+
+The model is
+
+$$
+y_{\text{% brain atrophy}, i} =
+\beta_0
++ \beta_1 x_{\text{Baseline GSH:GSSG}, i}
++ e_{i}
+$$
+
+Linear model.
+
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ concRatioM0, data = df2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.2866 -0.6484 -0.2690  0.6557  1.7164 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) -4.12773    1.87335  -2.203   0.0408 *
+## concRatioM0  0.02303    0.01293   1.781   0.0918 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9398 on 18 degrees of freedom
+## Multiple R-squared:  0.1498,	Adjusted R-squared:  0.1026 
+## F-statistic: 3.172 on 1 and 18 DF,  p-value: 0.09179
+```
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ concRatioM0 + studyArm, data = df2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.21955 -0.65633 -0.07133  0.55967  1.87990 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)     -0.705971   2.567220  -0.275   0.7866  
+## concRatioM0      0.002669   0.016475   0.162   0.8732  
+## studyArmPlacebo -0.980992   0.535398  -1.832   0.0845 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.8837 on 17 degrees of freedom
+## Multiple R-squared:   0.29,	Adjusted R-squared:  0.2065 
+## F-statistic: 3.472 on 2 and 17 DF,  p-value: 0.05439
+```
+
+```
+## 
+## Call:
+## lm(formula = brainAtrophy ~ concRatioM0 + studyArm + concRatioM0:studyArm, 
+##     data = df2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.4275 -0.4456 -0.2192  0.4234  1.9869 
+## 
+## Coefficients:
+##                             Estimate Std. Error t value Pr(>|t|)
+## (Intercept)                  1.34601    3.26793   0.412    0.686
+## concRatioM0                 -0.01058    0.02102  -0.503    0.622
+## studyArmPlacebo             -5.82711    4.81142  -1.211    0.243
+## concRatioM0:studyArmPlacebo  0.03426    0.03380   1.013    0.326
+## 
+## Residual standard error: 0.883 on 16 degrees of freedom
+## Multiple R-squared:  0.3329,	Adjusted R-squared:  0.2078 
+## F-statistic: 2.661 on 3 and 16 DF,  p-value: 0.08332
+```
+
+
+
+|term                        | estimate| std.error| statistic| p.value|
+|:---------------------------|--------:|---------:|---------:|-------:|
+|(Intercept)                 |     1.35|      3.27|      0.41|  0.6859|
+|concRatioM0                 |    -0.01|      0.02|     -0.50|  0.6217|
+|studyArmPlacebo             |    -5.83|      4.81|     -1.21|  0.2434|
+|concRatioM0:studyArmPlacebo |     0.03|      0.03|      1.01|  0.3259|
+
+Details (not shown).
+
+
+
+
+## Interpretation
+
+
+
+* Percent brain atrophy was not significantly associated with baseline GSH:GSSG concentration
+  * $\hat{\beta}$ of 0.023 (p-value = 0.0918)
+  * Correlation coefficient = 0.387
+  * Baseline GSH:GSSG concentration explains 15% of the variation in brain atrophy
+
+* The association was still not significant after adjusting for study arm
+  * $\hat{\beta}$ of 0.00267 (p-value = 0.873)
+  * Partial correlation coefficient = 0.0393
+  * Baseline GSH:GSSG concentration explains 0.154% of the variation in brain atrophy after adjusting for study arm
 
 
 
